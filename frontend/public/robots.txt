@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /assets/
+Crawl-delay: 1
 
+# Sitemap
 Sitemap: https://toolnix.pro/sitemap.xml

@@ -8,3 +8,7 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+// Dispatch render-event after React mounts — signals vite-plugin-prerender
+// that the page is fully rendered and ready to snapshot.
+document.dispatchEvent(new Event('render-event'))

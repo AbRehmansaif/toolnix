@@ -3,8 +3,12 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import RelatedTools from './components/RelatedTools';
+import SeoArticle from './components/SeoArticle';
+import Breadcrumb from './components/Breadcrumb';
 import { toolCategories } from './data/tools';
+import { seoData } from './data/seoContent';
 
 // Image Tools
 import ImageToPdf from './pages/image-tools/ImageToPdf';
@@ -64,40 +68,151 @@ import PdfToZip from './pages/pdf-conversion/PdfToZip';
 
 import './App.css';
 
+const BASE_URL = 'https://toolnix.pro';
+const OG_IMAGE = 'https://toolnix.pro/og-image.png';
+
+// ─── Helper: set or create a <meta> tag ─────────────────────────────────────
+function setMeta(selector, attribute, value) {
+  let el = document.querySelector(selector);
+  if (!el) {
+    el = document.createElement('meta');
+    // Parse out the attribute name/value from the selector
+    const match = selector.match(/\[([^\]=]+)="([^"]+)"\]/);
+    if (match) el.setAttribute(match[1], match[2]);
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attribute, value);
+}
+
+// ─── Helper: set or create a <link> tag ──────────────────────────────────────
+function setLink(rel, href) {
+  let el = document.querySelector(`link[rel="${rel}"]`);
+  if (!el) {
+    el = document.createElement('link');
+    el.setAttribute('rel', rel);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('href', href);
+}
+
+// ─── Find tool + category from path ──────────────────────────────────────────
+function findToolAndCategory(pathname) {
+  for (const category of toolCategories) {
+    const tool = category.tools.find(t => t.path === pathname);
+    if (tool) return { tool, category };
+  }
+  return { tool: null, category: null };
+}
+
 function Layout({ children }) {
   const location = useLocation();
   const isToolPage = location.pathname.startsWith('/tools/');
+  const { tool, category } = findToolAndCategory(location.pathname);
+  const currentToolId = tool?.id || null;
 
   useEffect(() => {
-    let pageTitle = 'ToolNix - Free Online PDF, Image & Developer Tools';
-    let metaDescription = 'ToolNix offers 40+ free online tools. Convert PDF to Word, edit PDFs, remove backgrounds, compress images, generate QR codes, and more!';
+    const canonicalUrl = `${BASE_URL}${location.pathname}`;
 
-    if (isToolPage) {
-      // Find the specific tool to set its SEO tags
-      for (const category of toolCategories) {
-        const tool = category.tools.find(t => t.path === location.pathname);
-        if (tool) {
-          pageTitle = `${tool.title} | ToolNix Free Online Tool`;
-          metaDescription = tool.description;
-          break;
-        }
-      }
+    if (isToolPage && tool) {
+      const toolSeo = seoData[tool.id] || {};
+      const pageTitle = toolSeo.metaTitle || `${tool.title} | ToolNix Free Online Tool`;
+      const metaDesc = toolSeo.metaDescription || tool.description;
+      const metaKeywords = toolSeo.keywords || tool.description;
+
+      // ── Primary tags ──────────────────────────────────────────────────────
+      document.title = pageTitle;
+      setMeta('meta[name="description"]', 'content', metaDesc);
+      setMeta('meta[name="keywords"]', 'content', metaKeywords);
+      setMeta('meta[name="robots"]', 'content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+
+      // ── Canonical ─────────────────────────────────────────────────────────
+      setLink('canonical', canonicalUrl);
+
+      // ── Open Graph ────────────────────────────────────────────────────────
+      setMeta('meta[property="og:type"]', 'content', 'website');
+      setMeta('meta[property="og:url"]', 'content', canonicalUrl);
+      setMeta('meta[property="og:title"]', 'content', pageTitle);
+      setMeta('meta[property="og:description"]', 'content', metaDesc);
+      setMeta('meta[property="og:image"]', 'content', OG_IMAGE);
+      setMeta('meta[property="og:site_name"]', 'content', 'ToolNix');
+
+      // ── Twitter Card ──────────────────────────────────────────────────────
+      setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
+      setMeta('meta[name="twitter:title"]', 'content', pageTitle);
+      setMeta('meta[name="twitter:description"]', 'content', metaDesc);
+      setMeta('meta[name="twitter:image"]', 'content', OG_IMAGE);
+    } else {
+      // ── Homepage defaults ──────────────────────────────────────────────────
+      document.title = 'ToolNix - Free Online PDF, Image & Developer Tools';
+      setMeta('meta[name="description"]', 'content', 'ToolNix offers 40+ free online tools. Convert PDF to Word, edit PDFs, remove backgrounds, compress images, generate QR codes, and more! 100% free with no registration required.');
+      setMeta('meta[name="robots"]', 'content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+      setLink('canonical', `${BASE_URL}/`);
+      setMeta('meta[property="og:url"]', 'content', `${BASE_URL}/`);
+      setMeta('meta[property="og:title"]', 'content', 'ToolNix - Free Online PDF, Image & Developer Tools');
+      setMeta('meta[property="og:description"]', 'content', 'Convert, edit, and compress PDFs and Images online for free. 40+ premium tools without registration.');
+      setMeta('meta[name="twitter:title"]', 'content', 'ToolNix - Free Online PDF, Image & Developer Tools');
+      setMeta('meta[name="twitter:description"]', 'content', 'Convert, edit, and compress PDFs and Images online for free. 40+ premium tools without registration.');
     }
 
-    // Update Browser Title
-    document.title = pageTitle;
-    
-    // Update Meta Description
-    const metaDescTag = document.querySelector('meta[name="description"]');
-    if (metaDescTag) {
-      metaDescTag.setAttribute('content', metaDescription);
+    // ── Dynamic JSON-LD Injection ──────────────────────────────────────────
+    const existingSchema = document.getElementById('dynamic-json-ld');
+    if (existingSchema) existingSchema.remove();
+
+    if (isToolPage && tool && seoData[tool.id]?.article?.faqs) {
+      const faqs = seoData[tool.id].article.faqs.items;
+      const pageTitle = seoData[tool.id]?.metaTitle || `${tool.title} | ToolNix Free Online Tool`;
+      const metaDesc = seoData[tool.id]?.metaDescription || tool.description;
+
+      // 1. SoftwareApplication Schema
+      const softwareSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: tool.title,
+        operatingSystem: 'Any',
+        applicationCategory: 'UtilitiesApplication',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        description: metaDesc,
+        url: canonicalUrl,
+      };
+
+      // 2. FAQPage Schema
+      const faqSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(faq => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: { '@type': 'Answer', text: faq.a },
+        })),
+      };
+
+      // 3. BreadcrumbList Schema
+      const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: category?.label || 'Tools', item: `${BASE_URL}/#${category?.id || 'tools'}` },
+          { '@type': 'ListItem', position: 3, name: tool.title, item: canonicalUrl },
+        ],
+      };
+
+      const schemaScript = document.createElement('script');
+      schemaScript.id = 'dynamic-json-ld';
+      schemaScript.type = 'application/ld+json';
+      schemaScript.text = JSON.stringify([softwareSchema, faqSchema, breadcrumbSchema]);
+      document.head.appendChild(schemaScript);
     }
-  }, [location, isToolPage]);
+  }, [location, isToolPage, tool, category]);
 
   return (
     <>
       <Navbar />
+      {isToolPage && tool && category && (
+        <Breadcrumb tool={tool} category={category} />
+      )}
       {children}
+      {isToolPage && currentToolId && <SeoArticle toolId={currentToolId} />}
       {isToolPage && <RelatedTools currentPath={location.pathname} />}
       <Footer />
     </>
@@ -165,6 +280,9 @@ function App() {
 
         {/* Developer Tools */}
         <Route path="/tools/favicon-generator"  element={<Layout><FaviconGenerator /></Layout>} />
+
+        {/* 404 Catch-All */}
+        <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
     </BrowserRouter>
   );

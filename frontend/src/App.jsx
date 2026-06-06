@@ -7,6 +7,8 @@ import NotFound from './pages/NotFound';
 import RelatedTools from './components/RelatedTools';
 import SeoArticle from './components/SeoArticle';
 import Breadcrumb from './components/Breadcrumb';
+import BlogList from './pages/blog/BlogList';
+import BlogPost from './pages/blog/BlogPost';
 import { toolCategories } from './data/tools';
 import { seoData } from './data/seoContent';
 
@@ -280,6 +282,10 @@ function App() {
 
         {/* Developer Tools */}
         <Route path="/tools/favicon-generator"  element={<Layout><FaviconGenerator /></Layout>} />
+
+        {/* Blog */}
+        <Route path="/blog" element={<Layout><BlogList /></Layout>} />
+        <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
 
         {/* 404 Catch-All */}
         <Route path="*" element={<Layout><NotFound /></Layout>} />

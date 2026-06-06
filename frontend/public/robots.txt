@@ -5,3 +5,4 @@ Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://toolnix.pro/sitemap.xml
+Sitemap: https://toolnix.pro/api/blogs/sitemap.xml

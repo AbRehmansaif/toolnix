@@ -29,6 +29,9 @@ const footerLinks = {
     { label: 'Remove EXIF Data', path: '/tools/remove-exif' },
     { label: 'QR Code Generator', path: '/tools/qr-code-generator' },
   ],
+  'Resources': [
+    { label: 'Blog', path: '/blog' },
+  ],
 };
 
 export default function Footer() {
@@ -78,7 +81,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="footer-tagline">
-              Your ultimate online utility suite. Process PDFs, edit images, and extract data instantly—100% secure and free, right in your browser.
+              Your ultimate online utility suite. Process PDFs, edit images, and extract data instantly 100% secure and free, right in your browser.
             </p>
           </div>
 

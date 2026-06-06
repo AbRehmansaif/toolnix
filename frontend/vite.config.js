@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import prerender from 'vite-plugin-prerender'
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
+const prerender = require('vite-plugin-prerender')
 
 // All routes to prerender at build time — generates real HTML for Google to crawl
 const routes = [

@@ -134,7 +134,7 @@ export default function PdfToWord() {
           <div className="tool-header-content">
             <div className="tool-header-title">PDF to Word</div>
             <div className="tool-header-desc">
-              Convert PDF to fully editable DOC &amp; DOCX — preserves text, fonts, spacing &amp; formatting.
+              Convert PDF to fully editable DOC &amp; DOCX, preserves text, fonts, spacing &amp; formatting.
             </div>
           </div>
         </div>
@@ -264,10 +264,10 @@ export default function PdfToWord() {
         {/* ── Right: sidebar ── */}
         <div>
           <div className="tool-sidebar-card">
-            <div className="sidebar-card-header">⚙️ Conversion Options</div>
+            <div className="sidebar-card-header">Conversion Options</div>
             <div className="sidebar-card-body">
               <p style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 16 }}>
-                Our two-stage converter preserves original layout, fonts, headings, and paragraph spacing.
+                Our two stage converter preserves original layout, fonts, headings, and paragraph spacing.
               </p>
               <button
                 className="tool-action-btn"

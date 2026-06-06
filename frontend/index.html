@@ -17,7 +17,9 @@
 
     <!-- ─── Favicon ─────────────────────────────────────────────────── -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
 
     <!-- ─── Open Graph / Facebook ───────────────────────────────────── -->
     <meta property="og:type" content="website" />
@@ -43,7 +45,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- ─── Static JSON-LD: WebSite + Organization ───────────────────── -->
+    <!-- ─── Static JSON-LD: WebSite + Organization + SiteNavigation ────── -->
     <script type="application/ld+json">
     [
       {
@@ -66,9 +68,94 @@
         "@type": "Organization",
         "name": "ToolNix",
         "url": "https://toolnix.pro",
-        "logo": "https://toolnix.pro/favicon.svg",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolnix.pro/favicon.svg",
+          "width": 48,
+          "height": 48
+        },
         "description": "ToolNix provides 40+ free online tools for working with PDFs, images, and developer workflows.",
         "sameAs": []
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "ToolNix - Top Tools",
+        "description": "The most popular free online tools on ToolNix",
+        "itemListElement": [
+          {
+            "@type": "SiteLinksSearchBox",
+            "url": "https://toolnix.pro",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://toolnix.pro/?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "ToolNix - Free Online PDF, Image & Developer Tools",
+        "url": "https://toolnix.pro/",
+        "description": "ToolNix offers 40+ free online tools. Convert PDF to Word, edit PDFs, remove backgrounds, compress images, generate QR codes, and more!",
+        "hasPart": [
+          {
+            "@type": "WebPage",
+            "name": "PDF to Word Converter",
+            "url": "https://toolnix.pro/tools/pdf-to-word",
+            "description": "Easily convert your PDF files into easy to edit DOC and DOCX documents."
+          },
+          {
+            "@type": "WebPage",
+            "name": "Merge PDF",
+            "url": "https://toolnix.pro/tools/pdf-merge",
+            "description": "Combine PDFs in the order you want with the easiest PDF merger available."
+          },
+          {
+            "@type": "WebPage",
+            "name": "PDF to JPG",
+            "url": "https://toolnix.pro/tools/pdf-to-jpg",
+            "description": "Convert each PDF page into a JPG or extract all images contained in a PDF."
+          },
+          {
+            "@type": "WebPage",
+            "name": "JPG to PDF",
+            "url": "https://toolnix.pro/tools/jpg-to-pdf",
+            "description": "Convert JPG images to PDF in seconds. Easily adjust orientation and margins."
+          },
+          {
+            "@type": "WebPage",
+            "name": "Compress PDF",
+            "url": "https://toolnix.pro/tools/pdf-compress",
+            "description": "Reduce file size while optimizing for maximal PDF quality."
+          },
+          {
+            "@type": "WebPage",
+            "name": "Background Remover",
+            "url": "https://toolnix.pro/tools/bg-remover",
+            "description": "Automatically remove or change image backgrounds using AI right in your browser."
+          },
+          {
+            "@type": "WebPage",
+            "name": "QR Code Generator",
+            "url": "https://toolnix.pro/tools/qr-code-generator",
+            "description": "Generate QR codes for URLs, text, contact info and more instantly."
+          },
+          {
+            "@type": "WebPage",
+            "name": "OCR Image to Text",
+            "url": "https://toolnix.pro/tools/ocr-image-to-text",
+            "description": "Extract text from scanned images using Optical Character Recognition."
+          },
+          {
+            "@type": "WebPage",
+            "name": "Blog - AI, Development & Tech Insights",
+            "url": "https://toolnix.pro/blog",
+            "description": "Explore in-depth articles on AI, software development, new technologies, and emerging trends."
+          }
+        ]
       }
     ]
     </script>

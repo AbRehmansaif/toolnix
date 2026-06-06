@@ -1,7 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import RelatedTools from './components/RelatedTools';
+import { toolCategories } from './data/tools';
 
 // Image Tools
 import ImageToPdf from './pages/image-tools/ImageToPdf';
@@ -62,10 +65,40 @@ import PdfToZip from './pages/pdf-conversion/PdfToZip';
 import './App.css';
 
 function Layout({ children }) {
+  const location = useLocation();
+  const isToolPage = location.pathname.startsWith('/tools/');
+
+  useEffect(() => {
+    let pageTitle = 'ToolNix - Free Online PDF, Image & Developer Tools';
+    let metaDescription = 'ToolNix offers 40+ free online tools. Convert PDF to Word, edit PDFs, remove backgrounds, compress images, generate QR codes, and more!';
+
+    if (isToolPage) {
+      // Find the specific tool to set its SEO tags
+      for (const category of toolCategories) {
+        const tool = category.tools.find(t => t.path === location.pathname);
+        if (tool) {
+          pageTitle = `${tool.title} | ToolNix Free Online Tool`;
+          metaDescription = tool.description;
+          break;
+        }
+      }
+    }
+
+    // Update Browser Title
+    document.title = pageTitle;
+    
+    // Update Meta Description
+    const metaDescTag = document.querySelector('meta[name="description"]');
+    if (metaDescTag) {
+      metaDescTag.setAttribute('content', metaDescription);
+    }
+  }, [location, isToolPage]);
+
   return (
     <>
       <Navbar />
       {children}
+      {isToolPage && <RelatedTools currentPath={location.pathname} />}
       <Footer />
     </>
   );

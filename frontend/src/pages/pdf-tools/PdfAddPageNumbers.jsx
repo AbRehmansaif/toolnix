@@ -1,0 +1,325 @@
+import { useState, useRef } from 'react';
+import { Hash, Upload, X, Download, CheckCircle, ChevronRight, File as FileIcon, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import '../../styles/ToolPage.css';
+
+function formatBytes(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+  return (b / 1048576).toFixed(1) + ' MB';
+}
+
+const loadScript = (id, src) => {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById(id)) {
+      resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.id = id;
+    script.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load script ${src}`));
+    document.head.appendChild(script);
+  });
+};
+
+export default function PdfAddPageNumbers() {
+  const [file, setFile] = useState(null);
+  const [drag, setDrag] = useState(false);
+  const [status, setStatus] = useState('idle');
+  const [progress, setProgress] = useState(0);
+  const [position, setPosition] = useState('Bottom Center');
+  const [format, setFormat] = useState('Page {n} of {total}');
+  const [fontSize, setFontSize] = useState(12);
+  const [color, setColor] = useState('#6b7280');
+  const [startNum, setStartNum] = useState(1);
+  const [margin, setMargin] = useState(25);
+  const [outputUrl, setOutputUrl] = useState(null);
+  const [outputName, setOutputName] = useState('numbered.pdf');
+  const inputRef = useRef();
+
+  const handleFile = (f) => {
+    if (f && f.type === 'application/pdf') {
+      setFile(f);
+      setOutputUrl(null);
+      setStatus('idle');
+    }
+  };
+
+  const process = async () => {
+    if (!file) return;
+    setStatus('processing');
+    setProgress(20);
+
+    try {
+      await loadScript('pdf-lib-script', 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
+      const { PDFDocument, StandardFonts, rgb } = window.PDFLib;
+      setProgress(40);
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const pdfPages = pdfDoc.getPages();
+      const total = pdfPages.length;
+
+      setProgress(60);
+
+      const parseHex = (hex) => {
+        const hexClean = hex.replace('#', '');
+        const r = parseInt(hexClean.substring(0, 2), 16) / 255;
+        const g = parseInt(hexClean.substring(2, 4), 16) / 255;
+        const b = parseInt(hexClean.substring(4, 6), 16) / 255;
+        return rgb(r, g, b);
+      };
+
+      const textColor = parseHex(color);
+
+      // Draw numbering on each page
+      pdfPages.forEach((page, i) => {
+        const { width, height } = page.getSize();
+        const numText = format
+          .replace('{n}', (i + Number(startNum)).toString())
+          .replace('{total}', total.toString());
+
+        const textWidth = font.widthOfTextAtSize(numText, Number(fontSize));
+        const textHeight = font.heightAtSize(Number(fontSize));
+
+        let x = 0;
+        let y = 0;
+
+        // X calculations
+        if (position.includes('Right')) {
+          x = width - textWidth - Number(margin);
+        } else if (position.includes('Center')) {
+          x = (width - textWidth) / 2;
+        } else {
+          x = Number(margin);
+        }
+
+        // Y calculations
+        if (position.includes('Top')) {
+          y = height - textHeight - Number(margin);
+        } else {
+          y = Number(margin);
+        }
+
+        page.drawText(numText, {
+          x,
+          y,
+          size: Number(fontSize),
+          font,
+          color: textColor,
+        });
+      });
+
+      setProgress(85);
+
+      const bytes = await pdfDoc.save();
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+
+      setOutputUrl(url);
+      setOutputName(`${file.name.replace(/\.pdf$/i, '')}_numbered.pdf`);
+      setProgress(100);
+      setStatus('done');
+    } catch (err) {
+      console.error(err);
+      setStatus('idle');
+      alert('Error adding page numbers: ' + err.message);
+    }
+  };
+
+  const download = () => {
+    if (!outputUrl) return;
+    const a = document.createElement('a');
+    a.href = outputUrl;
+    a.download = outputName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  return (
+    <div className="tool-page">
+      <div className="tool-breadcrumb">
+        <Link to="/">Home</Link>
+        <ChevronRight size={14} className="tool-breadcrumb-sep" />
+        <Link to="/#pdf-editing">PDF Editing</Link>
+        <ChevronRight size={14} className="tool-breadcrumb-sep" />
+        <span className="tool-breadcrumb-current">Add Page Numbers</span>
+      </div>
+
+      <div className="tool-header">
+        <div className="tool-header-inner">
+          <div className="tool-header-icon" style={{ background: '#eff6ff' }}>
+            <Hash size={36} color="#3b82f6" strokeWidth={1.6} />
+          </div>
+          <div className="tool-header-content">
+            <div className="tool-header-title">Add Page Numbers</div>
+            <div className="tool-header-desc">
+              Add page numbers to PDF files. Customize position, formatting, color and sizing client-side.
+            </div>
+            <div className="info-chips" style={{ marginTop: 16 }}>
+              <span className="info-chip">✓ Secure</span>
+              <span className="info-chip">✓ Client-Side</span>
+              <span className="info-chip">✓ Fully Customizable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="tool-main">
+        <div>
+          {!file ? (
+            <div
+              className={`upload-zone${drag ? ' dragover' : ''}`}
+              onDragOver={e => { e.preventDefault(); setDrag(true); }}
+              onDragLeave={() => setDrag(false)}
+              onDrop={e => { e.preventDefault(); setDrag(false); handleFile(e.dataTransfer.files[0]); }}
+              onClick={() => inputRef.current?.click()}
+            >
+              <input ref={inputRef} type="file" accept="application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
+              <div className="upload-zone-icon"><Upload size={32} color="#3b82f6" /></div>
+              <div className="upload-zone-title">Drop PDF file here</div>
+              <div className="upload-zone-btn" style={{ background: 'linear-gradient(135deg,#3b82f6,#2563eb)' }}>
+                <Upload size={14} /> Select PDF
+              </div>
+            </div>
+          ) : (
+            <div className="file-list">
+              <div className="file-item">
+                <div className="file-item-icon" style={{ background: '#eff6ff' }}><FileIcon size={18} color="#3b82f6" /></div>
+                <span className="file-item-name">{file.name}</span>
+                <span className="file-item-size">{formatBytes(file.size)}</span>
+                <button className="file-item-remove" onClick={() => { setFile(null); setOutputUrl(null); setStatus('idle'); }}><X size={14} /></button>
+              </div>
+            </div>
+          )}
+
+          {status === 'processing' && (
+            <div className="progress-wrap" style={{ marginTop: 16 }}>
+              <div className="progress-label"><span>Adding Page Numbers…</span><span>{Math.round(progress)}%</span></div>
+              <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%`, background: '#3b82f6' }} /></div>
+            </div>
+          )}
+
+          {status === 'done' && (
+            <div className="result-box" style={{ marginTop: 24 }}>
+              <div className="result-box-icon"><CheckCircle size={28} color="#22c55e" /></div>
+              <div className="result-box-title">Page Numbers Added!</div>
+              <button className="download-btn" onClick={download} style={{ background: 'linear-gradient(135deg,#3b82f6,#2563eb)' }}><Download size={16} /> Download Updated PDF</button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <div className="tool-sidebar-card">
+            <div className="sidebar-card-header">⚙️ Numbering Options</div>
+            <div className="sidebar-card-body">
+              <div style={{ marginBottom: 12 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Position</label>
+                <select className="sidebar-select" value={position} onChange={e => setPosition(e.target.value)}>
+                  <option>Bottom Center</option>
+                  <option>Bottom Right</option>
+                  <option>Bottom Left</option>
+                  <option>Top Center</option>
+                  <option>Top Right</option>
+                  <option>Top Left</option>
+                </select>
+              </div>
+
+              <div style={{ marginBottom: 12 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Format</label>
+                <select className="sidebar-select" value={format} onChange={e => setFormat(e.target.value)}>
+                  <option value="Page {n} of {total}">Page X of Y</option>
+                  <option value="Page {n}">Page X</option>
+                  <option value="{n}">X (number only)</option>
+                  <option value="- {n} -">- X -</option>
+                </select>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Font Size</label>
+                  <input
+                    type="number"
+                    className="sidebar-select"
+                    style={{ padding: '8px 12px' }}
+                    min="6"
+                    max="48"
+                    value={fontSize}
+                    onChange={e => setFontSize(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Text Color</label>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <input
+                      type="color"
+                      style={{ border: '1px solid #d1d5db', borderRadius: 4, width: 36, height: 36, padding: 2, cursor: 'pointer' }}
+                      value={color}
+                      onChange={e => setColor(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      className="sidebar-select"
+                      style={{ padding: '8px 6px', fontSize: 12 }}
+                      value={color}
+                      onChange={e => setColor(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Start From</label>
+                  <input
+                    type="number"
+                    className="sidebar-select"
+                    style={{ padding: '8px 12px' }}
+                    min="1"
+                    value={startNum}
+                    onChange={e => setStartNum(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Margin (pt)</label>
+                  <input
+                    type="number"
+                    className="sidebar-select"
+                    style={{ padding: '8px 12px' }}
+                    min="5"
+                    max="100"
+                    value={margin}
+                    onChange={e => setMargin(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <button
+                className="tool-action-btn"
+                style={{ background: 'linear-gradient(135deg,#3b82f6,#2563eb)' }}
+                disabled={!file || status === 'processing'}
+                onClick={process}
+              >
+                {status === 'processing' ? (
+                  <>
+                    <Loader2 className="animate-spin" size={18} />
+                    Processing…
+                  </>
+                ) : (
+                  <>
+                    <Hash size={18} />
+                    Add Page Numbers
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

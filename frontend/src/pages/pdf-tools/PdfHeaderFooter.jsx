@@ -1,0 +1,330 @@
+import { useState, useRef } from 'react';
+import { LayoutTemplate, Upload, X, Download, CheckCircle, ChevronRight, File as FileIcon, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import '../../styles/ToolPage.css';
+
+function formatBytes(b) {
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+  return (b / 1048576).toFixed(1) + ' MB';
+}
+
+const loadScript = (id, src) => {
+  return new Promise((resolve, reject) => {
+    if (document.getElementById(id)) {
+      resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.id = id;
+    script.src = src;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Failed to load script ${src}`));
+    document.head.appendChild(script);
+  });
+};
+
+export default function PdfHeaderFooter() {
+  const [file, setFile] = useState(null);
+  const [drag, setDrag] = useState(false);
+  const [status, setStatus] = useState('idle');
+  const [progress, setProgress] = useState(0);
+  
+  const [headerText, setHeaderText] = useState('');
+  const [footerText, setFooterText] = useState('');
+  
+  const [position, setPosition] = useState('Center'); // Left, Center, Right
+  const [fontSize, setFontSize] = useState(12);
+  const [color, setColor] = useState('#6b7280');
+  const [margin, setMargin] = useState(25);
+  
+  const [outputUrl, setOutputUrl] = useState(null);
+  const [outputName, setOutputName] = useState('edited.pdf');
+  const inputRef = useRef();
+
+  const handleFile = (f) => {
+    if (f && f.type === 'application/pdf') {
+      setFile(f);
+      setOutputUrl(null);
+      setStatus('idle');
+    }
+  };
+
+  const process = async () => {
+    if (!file) return;
+    if (!headerText && !footerText) {
+        alert('Please enter text for either the header or footer.');
+        return;
+    }
+    
+    setStatus('processing');
+    setProgress(20);
+
+    try {
+      await loadScript('pdf-lib-script', 'https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
+      const { PDFDocument, StandardFonts, rgb } = window.PDFLib;
+      setProgress(40);
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const pdfPages = pdfDoc.getPages();
+
+      setProgress(60);
+
+      const parseHex = (hex) => {
+        const hexClean = hex.replace('#', '');
+        const r = parseInt(hexClean.substring(0, 2), 16) / 255;
+        const g = parseInt(hexClean.substring(2, 4), 16) / 255;
+        const b = parseInt(hexClean.substring(4, 6), 16) / 255;
+        return rgb(r, g, b);
+      };
+
+      const textColor = parseHex(color);
+
+      // Draw header/footer on each page
+      pdfPages.forEach((page) => {
+        const { width, height } = page.getSize();
+
+        // Calculate Header Position
+        if (headerText) {
+            const headWidth = font.widthOfTextAtSize(headerText, Number(fontSize));
+            const headHeight = font.heightAtSize(Number(fontSize));
+            let xHead = 0;
+            if (position === 'Right') {
+                xHead = width - headWidth - Number(margin);
+            } else if (position === 'Center') {
+                xHead = (width - headWidth) / 2;
+            } else {
+                xHead = Number(margin);
+            }
+            let yHead = height - headHeight - Number(margin);
+            
+            page.drawText(headerText, { x: xHead, y: yHead, size: Number(fontSize), font, color: textColor });
+        }
+        
+        // Calculate Footer Position
+        if (footerText) {
+            const footWidth = font.widthOfTextAtSize(footerText, Number(fontSize));
+            let xFoot = 0;
+            if (position === 'Right') {
+                xFoot = width - footWidth - Number(margin);
+            } else if (position === 'Center') {
+                xFoot = (width - footWidth) / 2;
+            } else {
+                xFoot = Number(margin);
+            }
+            let yFoot = Number(margin);
+            
+            page.drawText(footerText, { x: xFoot, y: yFoot, size: Number(fontSize), font, color: textColor });
+        }
+      });
+
+      setProgress(85);
+
+      const bytes = await pdfDoc.save();
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+
+      setOutputUrl(url);
+      setOutputName(`${file.name.replace(/\.pdf$/i, '')}_stamped.pdf`);
+      setProgress(100);
+      setStatus('done');
+    } catch (err) {
+      console.error(err);
+      setStatus('idle');
+      alert('Error adding header/footer: ' + err.message);
+    }
+  };
+
+  const download = () => {
+    if (!outputUrl) return;
+    const a = document.createElement('a');
+    a.href = outputUrl;
+    a.download = outputName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  return (
+    <div className="tool-page">
+      <div className="tool-breadcrumb">
+        <Link to="/">Home</Link>
+        <ChevronRight size={14} className="tool-breadcrumb-sep" />
+        <Link to="/#pdf-editing">PDF Editing</Link>
+        <ChevronRight size={14} className="tool-breadcrumb-sep" />
+        <span className="tool-breadcrumb-current">Add Header & Footer</span>
+      </div>
+
+      <div className="tool-header">
+        <div className="tool-header-inner">
+          <div className="tool-header-icon" style={{ background: '#fdf2f8' }}>
+            <LayoutTemplate size={36} color="#ec4899" strokeWidth={1.6} />
+          </div>
+          <div className="tool-header-content">
+            <div className="tool-header-title">Add Header & Footer</div>
+            <div className="tool-header-desc">
+              Insert consistent headers and footers across all your PDF pages. Fast, secure, and fully client-side.
+            </div>
+            <div className="info-chips" style={{ marginTop: 16 }}>
+              <span className="info-chip">✓ Secure</span>
+              <span className="info-chip">✓ Client-Side</span>
+              <span className="info-chip">✓ Fully Customizable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="tool-main">
+        <div>
+          {!file ? (
+            <div
+              className={`upload-zone${drag ? ' dragover' : ''}`}
+              onDragOver={e => { e.preventDefault(); setDrag(true); }}
+              onDragLeave={() => setDrag(false)}
+              onDrop={e => { e.preventDefault(); setDrag(false); handleFile(e.dataTransfer.files[0]); }}
+              onClick={() => inputRef.current?.click()}
+            >
+              <input ref={inputRef} type="file" accept="application/pdf" style={{ display: 'none' }} onChange={e => handleFile(e.target.files[0])} />
+              <div className="upload-zone-icon"><Upload size={32} color="#ec4899" /></div>
+              <div className="upload-zone-title">Drop PDF file here</div>
+              <div className="upload-zone-btn" style={{ background: 'linear-gradient(135deg,#ec4899,#db2777)' }}>
+                <Upload size={14} /> Select PDF
+              </div>
+            </div>
+          ) : (
+            <div className="file-list">
+              <div className="file-item">
+                <div className="file-item-icon" style={{ background: '#fdf2f8' }}><FileIcon size={18} color="#ec4899" /></div>
+                <span className="file-item-name">{file.name}</span>
+                <span className="file-item-size">{formatBytes(file.size)}</span>
+                <button className="file-item-remove" onClick={() => { setFile(null); setOutputUrl(null); setStatus('idle'); }}><X size={14} /></button>
+              </div>
+            </div>
+          )}
+
+          {status === 'processing' && (
+            <div className="progress-wrap" style={{ marginTop: 16 }}>
+              <div className="progress-label"><span>Adding Elements…</span><span>{Math.round(progress)}%</span></div>
+              <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%`, background: '#ec4899' }} /></div>
+            </div>
+          )}
+
+          {status === 'done' && (
+            <div className="result-box" style={{ marginTop: 24 }}>
+              <div className="result-box-icon"><CheckCircle size={28} color="#22c55e" /></div>
+              <div className="result-box-title">Document Updated!</div>
+              <button className="download-btn" onClick={download} style={{ background: 'linear-gradient(135deg,#ec4899,#db2777)' }}><Download size={16} /> Download Updated PDF</button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <div className="tool-sidebar-card">
+            <div className="sidebar-card-header">⚙️ Stamping Options</div>
+            <div className="sidebar-card-body">
+              <div style={{ marginBottom: 12 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Header Text (Optional)</label>
+                <input
+                    type="text"
+                    className="sidebar-select"
+                    placeholder="E.g., Confidential Document"
+                    style={{ padding: '8px 12px', width: '100%' }}
+                    value={headerText}
+                    onChange={e => setHeaderText(e.target.value)}
+                />
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Footer Text (Optional)</label>
+                <input
+                    type="text"
+                    className="sidebar-select"
+                    placeholder="E.g., Company Name 2026"
+                    style={{ padding: '8px 12px', width: '100%' }}
+                    value={footerText}
+                    onChange={e => setFooterText(e.target.value)}
+                />
+              </div>
+
+              <div style={{ marginBottom: 12 }}>
+                <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Alignment</label>
+                <select className="sidebar-select" value={position} onChange={e => setPosition(e.target.value)}>
+                  <option>Left</option>
+                  <option>Center</option>
+                  <option>Right</option>
+                </select>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Font Size</label>
+                  <input
+                    type="number"
+                    className="sidebar-select"
+                    style={{ padding: '8px 12px' }}
+                    min="6"
+                    max="48"
+                    value={fontSize}
+                    onChange={e => setFontSize(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Margin (pt)</label>
+                  <input
+                    type="number"
+                    className="sidebar-select"
+                    style={{ padding: '8px 12px' }}
+                    min="5"
+                    max="100"
+                    value={margin}
+                    onChange={e => setMargin(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                  <label style={{ display: 'block', fontSize: 12, fontWeight: 600, marginBottom: 4 }}>Text Color</label>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <input
+                      type="color"
+                      style={{ border: '1px solid #d1d5db', borderRadius: 4, width: 36, height: 36, padding: 2, cursor: 'pointer' }}
+                      value={color}
+                      onChange={e => setColor(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      className="sidebar-select"
+                      style={{ padding: '8px 6px', fontSize: 12, flex: 1 }}
+                      value={color}
+                      onChange={e => setColor(e.target.value)}
+                    />
+                  </div>
+              </div>
+
+              <button
+                className="tool-action-btn"
+                style={{ background: 'linear-gradient(135deg,#ec4899,#db2777)' }}
+                disabled={!file || status === 'processing' || (!headerText && !footerText)}
+                onClick={process}
+              >
+                {status === 'processing' ? (
+                  <>
+                    <Loader2 className="animate-spin" size={18} />
+                    Processing…
+                  </>
+                ) : (
+                  <>
+                    <LayoutTemplate size={18} />
+                    Apply Changes
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

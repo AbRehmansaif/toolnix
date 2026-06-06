@@ -1,0 +1,134 @@
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  cursor: pointer;
+  transition:
+    transform var(--transition-spring),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base),
+    background var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-card-hover);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  border-radius: var(--radius-lg);
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-border-hover);
+}
+
+.tool-card:hover::before {
+  opacity: 1;
+}
+
+.tool-card:active {
+  transform: translateY(-2px);
+}
+
+/* Card Icon */
+.tool-card-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  position: relative;
+  transition: transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.tool-card:hover .tool-card-icon-wrap {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.tool-card-icon-wrap svg {
+  transition: transform var(--transition-spring);
+}
+
+/* Card Badge */
+.tool-card-badge {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  padding: 2px var(--space-2);
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-popular {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-ai {
+  background: linear-gradient(135deg, #e0e7ff, #ede9fe);
+  color: #4338ca;
+}
+
+.badge-free {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Card Content */
+.tool-card-title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.tool-card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* Card Arrow */
+.tool-card-arrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), gap var(--transition-fast);
+}
+
+.tool-card:hover .tool-card-arrow {
+  color: var(--color-primary);
+  gap: var(--space-2);
+}
+
+.tool-card-arrow svg {
+  transition: transform var(--transition-spring);
+}
+
+.tool-card:hover .tool-card-arrow svg {
+  transform: translateX(3px);
+}

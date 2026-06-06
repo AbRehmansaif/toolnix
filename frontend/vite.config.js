@@ -1,9 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { createRequire } from 'node:module'
-
-const require = createRequire(import.meta.url)
-const prerender = require('vite-plugin-prerender')
 
 // All routes to prerender at build time — generates real HTML for Google to crawl
 const routes = [
@@ -66,26 +62,6 @@ const routes = [
 export default defineConfig({
   plugins: [
     react(),
-    prerender({
-      staticDir: 'dist',
-      routes,
-      renderer: '@prerenderer/renderer-puppeteer',
-      rendererOptions: {
-        // Wait for the app to finish rendering before snapshotting
-        renderAfterDocumentEvent: 'render-event',
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      },
-      // Post-process each prerendered page
-      postProcess(renderedRoute) {
-        // Fix absolute URLs (prerender uses localhost)
-        renderedRoute.html = renderedRoute.html
-          .replace(/http:\/\/localhost:\d+\//g, 'https://toolnix.pro/')
-          .replace(/href="\//g, 'href="/')  // keep relative links
-          .replace(/<script[^>]*module[^>]*><\/script>/g, ''); // strip module preload hints
-        return renderedRoute;
-      },
-    }),
   ],
 
   optimizeDeps: {

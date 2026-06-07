@@ -89,7 +89,7 @@ export default function BlogList() {
         </div>
       </div>
 
-      <div className="tool-main" style={{ gridTemplateColumns: '1fr 300px' }}>
+      <div className="tool-main blog-layout">
         {/* Main Content */}
         <div>
           <h2 style={{ marginBottom: 24, fontSize: 24, color: '#0f172a' }}>{currentCatName}</h2>
@@ -228,9 +228,16 @@ export default function BlogList() {
       </div>
       
       <style>{`
+        .blog-layout { grid-template-columns: 1fr 300px; }
         .hover-lift:hover {
           transform: translateY(-4px);
           box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 992px) {
+          .blog-layout { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+          .tool-header-title { font-size: 28px !important; }
         }
       `}</style>
     </div>

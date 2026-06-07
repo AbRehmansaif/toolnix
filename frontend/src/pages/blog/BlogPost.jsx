@@ -9,6 +9,8 @@ export default function BlogPost() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [parsedContent, setParsedContent] = useState('');
+  const [toc, setToc] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -20,6 +22,42 @@ export default function BlogPost() {
       .then(data => {
         setPost(data);
         setError(false);
+        
+        // Process HTML content to decode entities and build TOC
+        if (data.content) {
+          let text = data.content;
+          try {
+            const txt = document.createElement("textarea");
+            for (let i = 0; i < 5; i++) {
+              txt.innerHTML = text;
+              if (txt.value === text) break;
+              text = txt.value;
+            }
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const headings = doc.querySelectorAll('h2, h3');
+            const tocItems = [];
+            
+            headings.forEach((heading, index) => {
+              // Extract text cleanly, even if it contains emojis
+              const textContent = heading.textContent.trim();
+              const id = `heading-${index}`;
+              heading.id = id;
+              tocItems.push({
+                id,
+                text: textContent,
+                level: heading.tagName.toLowerCase()
+              });
+            });
+            
+            setToc(tocItems);
+            setParsedContent(doc.body.innerHTML);
+          } catch (e) {
+            console.error("Content parsing error:", e);
+            setParsedContent(text);
+          }
+        }
       })
       .catch(err => {
         console.error(err);
@@ -129,14 +167,11 @@ export default function BlogPost() {
             </Link>
           )}
           
-          <h1 style={{ fontSize: 36, color: '#0f172a', lineHeight: 1.2, marginBottom: 20 }}>
+          <h1 className="blog-title">
             {post.title}
           </h1>
           
-          <div style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, 
-            fontSize: 14, color: '#64748b' 
-          }}>
+          <div className="blog-meta">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <User size={16} />
               {post.author?.name || 'Toolnix Team'}
@@ -166,22 +201,22 @@ export default function BlogPost() {
           </figure>
         )}
 
+        {toc.length > 0 && (
+          <div className="blog-toc">
+            <h3>Table of Contents</h3>
+            <ul>
+              {toc.map(item => (
+                <li key={item.id} className={`toc-item ${item.level}`}>
+                  <a href={`#${item.id}`}>{item.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div 
           className="blog-content"
-          dangerouslySetInnerHTML={{ 
-            __html: (() => {
-              let text = post.content || '';
-              // Handle multiple levels of escaping (e.g. &amp;lt;h1&amp;gt; -> &lt;h1&gt; -> <h1>)
-              for (let i = 0; i < 3; i++) {
-                text = text.replace(/&amp;/g, '&')
-                           .replace(/&lt;/g, '<')
-                           .replace(/&gt;/g, '>')
-                           .replace(/&quot;/g, '"')
-                           .replace(/&#39;/g, "'");
-              }
-              return text;
-            })()
-          }} 
+          dangerouslySetInnerHTML={{ __html: parsedContent }} 
           style={{ fontSize: 17, lineHeight: 1.7, color: '#334155' }}
         />
 
@@ -211,6 +246,8 @@ export default function BlogPost() {
       </article>
 
       <style>{`
+        .blog-title { font-size: 36px; color: #0f172a; line-height: 1.2; margin-bottom: 20px; }
+        .blog-meta { display: flex; align-items: center; justify-content: center; gap: 24px; font-size: 14px; color: #64748b; flex-wrap: wrap; }
         .blog-content h2 { font-size: 28px; color: #0f172a; margin: 40px 0 20px; }
         .blog-content h3 { font-size: 22px; color: #0f172a; margin: 32px 0 16px; }
         .blog-content p { margin-bottom: 20px; }
@@ -222,6 +259,22 @@ export default function BlogPost() {
         .blog-content blockquote { border-left: 4px solid #2b5ce7; margin: 0 0 20px; padding: 4px 0 4px 20px; color: #475569; font-style: italic; }
         .blog-content .cta-box { background: #f8fafc; border-left: 4px solid #2b5ce7; padding: 20px; border-radius: 0 8px 8px 0; margin: 32px 0; }
         .blog-content .affiliate-box { background: #fffbeb; border: 1px solid #fde68a; padding: 20px; border-radius: 8px; margin: 32px 0; }
+        
+        .blog-toc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 24px; margin-bottom: 40px; }
+        .blog-toc h3 { margin-top: 0; margin-bottom: 16px; font-size: 18px; color: #0f172a; }
+        .blog-toc ul { list-style: none; padding-left: 0; margin: 0; }
+        .blog-toc li { margin-bottom: 12px; }
+        .blog-toc li a { color: #475569; text-decoration: none; font-size: 15px; transition: color 0.2s; }
+        .blog-toc li a:hover { color: #2b5ce7; }
+        .blog-toc .h3 { padding-left: 20px; font-size: 14px; }
+        .blog-toc .h3 a { color: #64748b; }
+        
+        @media (max-width: 768px) {
+          .blog-title { font-size: 28px; }
+          .blog-meta { gap: 12px; }
+          .blog-content h2 { font-size: 24px; margin: 32px 0 16px; }
+          .blog-content h3 { font-size: 20px; }
+        }
       `}</style>
     </div>
   );

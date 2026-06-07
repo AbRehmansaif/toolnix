@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-mep$cfxiz+5sw!^zit&0in!6v)g83^vn+xu=c7r+0epl_6!b)l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Relax ALLOWED_HOSTS for now since Nginx handles domain routing
 ALLOWED_HOSTS = ['*']
+
+# Tell Django it's behind a secure proxy so admin panel URLs use HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_TRUSTED_ORIGINS = ['https://toolnix.pro', 'https://www.toolnix.pro']
 
 
 # Application definition

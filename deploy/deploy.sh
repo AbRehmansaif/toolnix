@@ -96,12 +96,10 @@ else
   echo "[WARN] Media volume '$MEDIA_VOLUME' not found — skipping."
 fi
 
-# ── 6. Deploy Nginx config & reload ───────────────────────────────────────────
+# ── 6. Reload Nginx ───────────────────────────────────────────────────────────
 echo ""
-echo "[6/6] Deploying Nginx config..."
-cp "$SCRIPT_DIR/toolnix.pro.conf" /etc/nginx/sites-available/toolnix.pro.conf
-ln -sf /etc/nginx/sites-available/toolnix.pro.conf /etc/nginx/sites-enabled/toolnix.pro.conf
-
+echo "[6/6] Reloading Nginx..."
+# We no longer copy the Nginx config automatically because it overwrites Certbot's SSL settings.
 nginx -t && systemctl reload nginx
 echo "[INFO] Nginx reloaded."
 

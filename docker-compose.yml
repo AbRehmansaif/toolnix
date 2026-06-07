@@ -15,6 +15,7 @@ services:
       - "8000:8000"
     volumes:
       - backend_media:/app/media
+      - backend_db:/app/db
     restart: unless-stopped
     environment:
       - DJANGO_DEBUG=False
@@ -24,3 +25,4 @@ services:
 volumes:
   frontend_dist:
   backend_media:
+  backend_db:

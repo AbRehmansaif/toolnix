@@ -96,6 +96,13 @@ else
   echo "[WARN] Media volume '$MEDIA_VOLUME' not found — skipping."
 fi
 
+echo ""
+echo "Fixing permissions for Nginx..."
+chown -R www-data:www-data /var/www/toolnix.pro/html || true
+chown -R www-data:www-data /var/www/toolnix.pro/media || true
+chmod -R 755 /var/www/toolnix.pro/html || true
+chmod -R 755 /var/www/toolnix.pro/media || true
+
 # ── 6. Reload Nginx ───────────────────────────────────────────────────────────
 echo ""
 echo "[6/6] Reloading Nginx..."

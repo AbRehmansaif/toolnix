@@ -168,7 +168,13 @@ export default function BlogPost() {
 
         <div 
           className="blog-content"
-          dangerouslySetInnerHTML={{ __html: post.content }} 
+          dangerouslySetInnerHTML={{ 
+            __html: (() => {
+              const txt = document.createElement("textarea");
+              txt.innerHTML = post.content;
+              return txt.value;
+            })()
+          }} 
           style={{ fontSize: 17, lineHeight: 1.7, color: '#334155' }}
         />
 

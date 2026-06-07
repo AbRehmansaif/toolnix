@@ -170,9 +170,16 @@ export default function BlogPost() {
           className="blog-content"
           dangerouslySetInnerHTML={{ 
             __html: (() => {
-              const txt = document.createElement("textarea");
-              txt.innerHTML = post.content;
-              return txt.value;
+              let text = post.content || '';
+              // Handle multiple levels of escaping (e.g. &amp;lt;h1&amp;gt; -> &lt;h1&gt; -> <h1>)
+              for (let i = 0; i < 3; i++) {
+                text = text.replace(/&amp;/g, '&')
+                           .replace(/&lt;/g, '<')
+                           .replace(/&gt;/g, '>')
+                           .replace(/&quot;/g, '"')
+                           .replace(/&#39;/g, "'");
+              }
+              return text;
             })()
           }} 
           style={{ fontSize: 17, lineHeight: 1.7, color: '#334155' }}
@@ -213,6 +220,8 @@ export default function BlogPost() {
         .blog-content ul, .blog-content ol { margin-bottom: 20px; padding-left: 24px; }
         .blog-content li { margin-bottom: 8px; }
         .blog-content blockquote { border-left: 4px solid #2b5ce7; margin: 0 0 20px; padding: 4px 0 4px 20px; color: #475569; font-style: italic; }
+        .blog-content .cta-box { background: #f8fafc; border-left: 4px solid #2b5ce7; padding: 20px; border-radius: 0 8px 8px 0; margin: 32px 0; }
+        .blog-content .affiliate-box { background: #fffbeb; border: 1px solid #fde68a; padding: 20px; border-radius: 8px; margin: 32px 0; }
       `}</style>
     </div>
   );

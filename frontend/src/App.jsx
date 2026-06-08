@@ -11,6 +11,7 @@ import BlogList from './pages/blog/BlogList';
 import BlogPost from './pages/blog/BlogPost';
 import { toolCategories } from './data/tools';
 import { seoData } from './data/seoContent';
+import ILovePdfAlternative from './pages/alternatives/ILovePdfAlternative';
 
 // Image Tools
 import ImageToPdf from './pages/image-tools/ImageToPdf';
@@ -282,6 +283,9 @@ function App() {
 
         {/* Developer Tools */}
         <Route path="/tools/favicon-generator"  element={<Layout><FaviconGenerator /></Layout>} />
+
+        {/* Alternatives */}
+        <Route path="/ilovepdf-alternative" element={<Layout><ILovePdfAlternative /></Layout>} />
 
         {/* Blog */}
         <Route path="/blog" element={<Layout><BlogList /></Layout>} />

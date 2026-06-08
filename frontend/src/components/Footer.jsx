@@ -31,6 +31,7 @@ const footerLinks = {
   ],
   'Resources': [
     { label: 'Blog', path: '/blog' },
+    { label: 'iLovePDF Alternative', path: '/ilovepdf-alternative' },
   ],
 };
 

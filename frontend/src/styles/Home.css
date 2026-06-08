@@ -2,11 +2,11 @@
 
 /* Hero */
 .hero {
-  padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-16);
+  padding: calc(var(--nav-height) + var(--space-20)) 0 var(--space-8);
   background: var(--gradient-hero);
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero::before {

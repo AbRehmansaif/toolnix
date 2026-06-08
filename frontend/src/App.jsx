@@ -12,6 +12,7 @@ import BlogPost from './pages/blog/BlogPost';
 import { toolCategories } from './data/tools';
 import { seoData } from './data/seoContent';
 import ILovePdfAlternative from './pages/alternatives/ILovePdfAlternative';
+import SmallpdfAlternative from './pages/alternatives/SmallpdfAlternative';
 
 // Image Tools
 import ImageToPdf from './pages/image-tools/ImageToPdf';
@@ -286,6 +287,7 @@ function App() {
 
         {/* Alternatives */}
         <Route path="/ilovepdf-alternative" element={<Layout><ILovePdfAlternative /></Layout>} />
+        <Route path="/smallpdf-alternative" element={<Layout><SmallpdfAlternative /></Layout>} />
 
         {/* Blog */}
         <Route path="/blog" element={<Layout><BlogList /></Layout>} />

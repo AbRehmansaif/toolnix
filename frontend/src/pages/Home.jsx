@@ -162,7 +162,7 @@ export default function Home() {
         <div className="home-search-container" ref={searchRef} style={{ maxWidth: '640px', margin: '0 auto', position: 'relative', padding: '0 24px', zIndex: 200 }}>
           <div style={{ position: 'relative' }}>
             {/* Icon */}
-            <span style={{ position: 'absolute', left: '38px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', display: 'flex', alignItems: 'center', pointerEvents: 'none', zIndex: 1 }}>
+            <span style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', display: 'flex', alignItems: 'center', pointerEvents: 'none', zIndex: 1 }}>
               <Search size={20} />
             </span>
             <input 
@@ -184,7 +184,7 @@ export default function Home() {
               }}
               style={{
                 width: '100%',
-                padding: '16px 20px 16px 52px',
+                padding: '16px 20px 16px 48px',
                 borderRadius: '14px',
                 border: '2px solid #e2e8f0',
                 fontSize: '15px',

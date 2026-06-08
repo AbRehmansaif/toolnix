@@ -13,6 +13,7 @@ import { toolCategories } from './data/tools';
 import { seoData } from './data/seoContent';
 import ILovePdfAlternative from './pages/alternatives/ILovePdfAlternative';
 import SmallpdfAlternative from './pages/alternatives/SmallpdfAlternative';
+import ScrollToTop from './components/ScrollToTop';
 
 // Image Tools
 import ImageToPdf from './pages/image-tools/ImageToPdf';
@@ -226,6 +227,7 @@ function Layout({ children }) {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
 

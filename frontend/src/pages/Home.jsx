@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { FileText, Settings, Image, Zap, Users, Star, Code } from 'lucide-react';
 import ToolCard from '../components/ToolCard';
 import { toolCategories, filterTabs } from '../data/tools';
@@ -19,8 +21,53 @@ export default function Home() {
       ? toolCategories
       : toolCategories.filter((c) => c.id === activeFilter);
 
+  const schemaOrgJSONLD = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ToolNix",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "ToolNix is a complete suite of free online tools for PDF editing, image conversion, and developer utilities. No registration required."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is ToolNix completely free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, ToolNix is 100% free. There are no daily limits, no hidden fees, and no registration required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my files secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. All uploads are encrypted using HTTPS and files are automatically deleted from our servers within 1 hour."
+          }
+        }
+      ]
+    }
+  ];
+
   return (
     <main>
+      <Helmet>
+        <title>ToolNix | Free Online PDF, Image & Developer Tools</title>
+        <meta name="description" content="ToolNix is a complete suite of free online tools for PDF editing, image conversion, and developer utilities. No registration required, 100% free." />
+        <link rel="canonical" href="https://toolnix.pro/" />
+        <meta property="og:title" content="ToolNix | Free Online PDF, Image & Developer Tools" />
+        <meta property="og:description" content="ToolNix is a complete suite of free online tools for PDF editing, image conversion, and developer utilities. No registration required, 100% free." />
+        <script type="application/ld+json">
+          {JSON.stringify(schemaOrgJSONLD)}
+        </script>
+      </Helmet>
+
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero-inner">
@@ -30,15 +77,18 @@ export default function Home() {
           </div>
 
           <h1 className="hero-title">
-            Every tool you need to work with{' '}
+            ToolNix: Every tool you need to work with{' '}
             <span className="hero-title-highlight">PDFs &amp; Images</span>{' '}
             in one place
           </h1>
 
           <p className="hero-subtitle">
-            All tools are 100% FREE and easy to use. Merge, split, compress,
-            convert, rotate, watermark PDFs and process images — all with just
-            a few clicks.
+            ToolNix is a free online toolbox for everyday digital tasks. Whether you need to{' '}
+            <Link to="/tools/pdf-compress" style={{ color: 'inherit', textDecoration: 'underline' }}>compress a PDF</Link>,{' '}
+            <Link to="/tools/pdf-to-word" style={{ color: 'inherit', textDecoration: 'underline' }}>convert PDF to Word</Link>,{' '}
+            <Link to="/tools/bg-remover" style={{ color: 'inherit', textDecoration: 'underline' }}>remove a background from an image</Link>, or{' '}
+            <Link to="/tools/qr-code-generator" style={{ color: 'inherit', textDecoration: 'underline' }}>generate a QR code</Link> and other 40+ tools, everything is free, instant,
+            and requires zero registration.
           </p>
 
           {/* Stats */}
@@ -100,7 +150,12 @@ export default function Home() {
                     <CatIcon size={18} />
                   </div>
                   <div>
-                    <h2 className="section-title">{cat.label}</h2>
+                    <h2 className="section-title">
+                      {cat.id === 'pdf-conversion'  && 'PDF Conversion — Free Online PDF Converter'}
+                      {cat.id === 'pdf-editing'     && 'PDF Editing — Free Online PDF Editor'}
+                      {cat.id === 'image-tools'     && 'Image Tools — Free Online Image Editor and Converter'}
+                      {cat.id === 'developer-tools' && 'Developer Tools — Free Online Utilities for Developers'}
+                    </h2>
                     <p className="section-subtitle">
                       {cat.id === 'pdf-conversion'  && 'Convert PDFs to and from popular formats'}
                       {cat.id === 'pdf-editing'     && 'Edit, organize and manage your PDF files'}
@@ -131,6 +186,22 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* ── FAQ Section ── */}
+      <section className="faq-section" style={{ maxWidth: '800px', margin: '60px auto', padding: '0 24px' }}>
+        <h2 style={{ fontSize: '28px', color: '#0f172a', marginBottom: '24px', textAlign: 'center', fontWeight: 'bold' }}>Frequently Asked Questions</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <details style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', transition: 'all 0.2s ease' }}>
+            <summary style={{ fontWeight: '600', cursor: 'pointer', color: '#0f172a', outline: 'none' }}>Is ToolNix completely free?</summary>
+            <p style={{ marginTop: '12px', marginBottom: '0', color: '#475569', lineHeight: 1.6 }}>Yes, ToolNix is 100% free. There are no daily limits, no hidden fees, and no registration required.</p>
+          </details>
+          <details style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', transition: 'all 0.2s ease' }}>
+            <summary style={{ fontWeight: '600', cursor: 'pointer', color: '#0f172a', outline: 'none' }}>Are my files secure?</summary>
+            <p style={{ marginTop: '12px', marginBottom: '0', color: '#475569', lineHeight: 1.6 }}>Absolutely. All uploads are encrypted using HTTPS and files are automatically deleted from our servers within 1 hour to ensure complete privacy.</p>
+          </details>
+        </div>
+      </section>
+
 
       {/* ── CTA Banner ── */}
       <div className="cta-banner">

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  FileText, Scissors, Archive, ChevronDown, Grid3X3, LogIn, UserPlus
-} from 'lucide-react';
-import { toolCategories } from '../data/tools';
+import * as Icons from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { toolCategories, navLinks } from '../data/tools';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
@@ -16,14 +15,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Navigate to home then scroll to anchor
-  const goToAnchor = (anchor) => {
-    navigate('/');
-    setTimeout(() => {
-      document.getElementById(anchor)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
   return (
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="navbar-inner">
@@ -35,35 +26,51 @@ export default function Navbar() {
 
         {/* Nav Links */}
         <div className="navbar-nav">
-          {toolCategories.map((cat) => (
-            <div className="all-tools-dropdown" key={cat.id}>
-              <button className="nav-link nav-link-all" style={{ color: 'var(--color-text-primary)' }}>
-                {cat.label} <ChevronDown size={14} />
-              </button>
-              <div className="dropdown-menu" style={{ width: '320px', left: '0', transform: 'translateX(0) translateY(-8px)' }}>
-                <div className="dropdown-category">
-                  {cat.tools.map((tool) =>
-                    tool.path ? (
-                      <Link key={tool.id} to={tool.path} className="dropdown-tool-link">
-                        <span className="dropdown-tool-dot" style={{ background: tool.color }} />
-                        {tool.title}
-                      </Link>
-                    ) : (
-                      <button
-                        key={tool.id}
-                        className="dropdown-tool-link"
-                        style={{ cursor: 'pointer', background: 'none', border: 'none', fontFamily: 'inherit', width: '100%', textAlign: 'left', padding: 0 }}
-                        onClick={() => goToAnchor(tool.id)}
-                      >
-                        <span className="dropdown-tool-dot" style={{ background: tool.color }} />
-                        {tool.title}
-                      </button>
-                    )
-                  )}
+          {toolCategories.map((cat) => {
+            const isLarge = cat.tools.length > 10;
+            return (
+              <div className="all-tools-dropdown" key={cat.id}>
+                <button className="nav-link nav-link-all" style={{ color: 'var(--color-text-primary)' }}>
+                  {cat.label} <ChevronDown size={14} />
+                </button>
+                <div className="dropdown-menu" style={{ 
+                  width: isLarge ? '600px' : '300px', 
+                  left: '0', 
+                  transform: 'translateX(0) translateY(-8px)' 
+                }}>
+                  <div style={{ columnCount: isLarge ? 2 : 1, columnGap: '24px' }}>
+                    {cat.tools.map((tool) => {
+                      const IconComponent = Icons[tool.icon] || Icons.Circle;
+                      return (
+                        <Link 
+                          key={tool.id} 
+                          to={tool.path || `/tools/${tool.id}`} 
+                          className="dropdown-tool-link"
+                          style={{ 
+                            padding: '8px 0', 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: '10px', 
+                            color: '#334155', 
+                            textDecoration: 'none', 
+                            fontSize: '14px',
+                            fontWeight: 500,
+                            transition: 'color 0.2s',
+                            breakInside: 'avoid'
+                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.color = tool.color; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.transform = 'translateX(3px)'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = '#334155'; e.currentTarget.style.transform = 'none'; }}
+                        >
+                          <IconComponent size={18} color={tool.color} style={{ flexShrink: 0 }} />
+                          <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tool.title}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Actions - Removed as requested */}

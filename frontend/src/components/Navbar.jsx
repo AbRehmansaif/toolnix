@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Icons from 'lucide-react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { toolCategories, navLinks } from '../data/tools';
 import '../styles/Navbar.css';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function Navbar() {
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="navbar-inner">
         {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={() => setIsMobileMenuOpen(false)}>
           <div className="logo-icon">T<span style={{ color: '#fca5a5' }}>♥</span></div>
           <span className="logo-text">Tool<span>Nix</span></span>
         </Link>
@@ -73,10 +74,37 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Actions - Removed as requested */}
-        <div className="navbar-actions">
-        </div>
+        {/* Mobile Toggle Button */}
+        <button 
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="mobile-menu">
+          <div className="mobile-menu-inner">
+            {toolCategories.map((cat) => (
+              <a 
+                key={cat.id} 
+                href={`/#${cat.id}`} 
+                className="mobile-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {cat.label}
+              </a>
+            ))}
+            <div className="mobile-menu-divider"></div>
+            <Link to="/blog" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
+            <Link to="/ilovepdf-alternative" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>iLovePDF Alternative</Link>
+            <Link to="/smallpdf-alternative" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Smallpdf Alternative</Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

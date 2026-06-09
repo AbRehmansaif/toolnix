@@ -792,11 +792,39 @@
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
+  .tool-header {
+    padding: var(--space-6) 0 var(--space-4);
+  }
   .tool-header-inner {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-4);
+  }
+  .tool-header-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+  }
+  .tool-header-icon svg {
+    width: 32px !important;
+    height: 32px !important;
   }
   .tool-header-title {
-    font-size: var(--font-size-2xl);
+    font-size: 24px;
+    margin-bottom: var(--space-2);
+  }
+  .tool-header-desc {
+    font-size: var(--font-size-sm);
+    margin: 0 auto;
+  }
+  .info-chips {
+    justify-content: center;
+    gap: var(--space-2);
+  }
+  .info-chip {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-xs);
   }
   .converter-result {
     grid-template-columns: 1fr;

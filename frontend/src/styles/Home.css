@@ -6,7 +6,7 @@
   background: var(--gradient-hero);
   text-align: center;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .hero::before {
@@ -295,9 +295,47 @@
     font-size: var(--font-size-3xl);
   }
 
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+
   .hero-stats {
-    gap: var(--space-5);
-    padding: var(--space-4) var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-5);
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stat-divider {
+    display: none;
+  }
+
+  .filter-tabs-wrap {
+    padding-top: var(--space-2);
+  }
+
+  .trusted-logos {
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
   }
 }
 

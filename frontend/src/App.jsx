@@ -146,6 +146,9 @@ function Layout({ children }) {
       setMeta('meta[name="twitter:title"]', 'content', pageTitle);
       setMeta('meta[name="twitter:description"]', 'content', metaDesc);
       setMeta('meta[name="twitter:image"]', 'content', OG_IMAGE);
+    } else if (location.pathname.startsWith('/blog') || location.pathname.includes('-alternative')) {
+      // Allow custom pages to handle their own SEO (e.g. via react-helmet)
+      // Do not overwrite them with homepage defaults.
     } else {
       // ── Homepage defaults ──────────────────────────────────────────────────
       document.title = 'ToolNix - Free Online PDF, Image & Developer Tools';

@@ -406,7 +406,7 @@ SEO_DATA = {
     'image-metadata': {
         'title': 'Image Metadata Viewer Free Online — Read EXIF Data | ToolNix',
         'description': 'View image metadata online for free. Read EXIF data from any photo — GPS location, camera settings, date taken, and more. No registration. Instant results.',
-        'keywords': 'image metadata viewer online free, read exif data from photo, view image metadata',
+        'keywords': 'image metadata viewer online free, read exif data from photo online, view image metadata online free, exif data viewer online, check photo metadata online free, see gps location from photo, how to view metadata of an image online free, read exif data from jpg online no software, view gps coordinates in photo online free, check where a photo was taken from metadata, online exif reader no signup, view camera settings from photo free, what metadata is in my photo online check, read iptc xmp data from image free online, find location of photo using metadata free, exif data reader online free tool',
         'json_ld': {
             '@context': 'https://schema.org',
             '@graph': [
@@ -452,22 +452,6 @@ SEO_DATA = {
                             'acceptedAnswer': {
                                 '@type': 'Answer',
                                 'text': 'EXIF stores technical camera data like settings, GPS, and timestamps. IPTC stores editorial data like captions and copyright. XMP is Adobe\'s standard for edit history and ratings. ToolNix reads all three.',
-                            },
-                        },
-                        {
-                            '@type': 'Question',
-                            'name': 'What image formats are supported?',
-                            'acceptedAnswer': {
-                                '@type': 'Answer',
-                                'text': 'JPG/JPEG, PNG, WEBP, TIFF, BMP, HEIC (iPhone), and many RAW formats (CR2, NEF, ARW) are supported for metadata reading.',
-                            },
-                        },
-                        {
-                            '@type': 'Question',
-                            'name': 'Is my image uploaded to ToolNix servers?',
-                            'acceptedAnswer': {
-                                '@type': 'Answer',
-                                'text': 'Your image is processed securely over HTTPS. Files are automatically deleted from our servers within 1 hour. We never store or share your image data.',
                             },
                         },
                     ],

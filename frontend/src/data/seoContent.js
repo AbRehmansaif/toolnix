@@ -2013,6 +2013,62 @@ export const seoData = {
       }
     }
   },
+  "image-metadata": {
+    "keywords": "image metadata viewer online free, read exif data from photo online, view image metadata online free, exif data viewer online, check photo metadata online free, see gps location from photo, how to view metadata of an image online free, read exif data from jpg online no software, view gps coordinates in photo online free, check where a photo was taken from metadata, online exif reader no signup, view camera settings from photo free, what metadata is in my photo online check, read iptc xmp data from image free online, find location of photo using metadata free, exif data reader online free tool",
+    "metaTitle": "Image Metadata Viewer Free Online — Read EXIF Data | ToolNix",
+    "metaDescription": "View image metadata online for free. Read EXIF data from any photo — GPS location, camera settings, date taken, and more. No registration. Instant results.",
+    "article": {
+      "intro": "Need an **image metadata viewer online free**? ToolNix offers a powerful **exif data viewer online** that reads and displays all standard metadata formats embedded in digital photos, including EXIF, IPTC, and XMP. If you want to know **how to view metadata of an image online free**, simply use our tool to seamlessly **read exif data from photo online** and **check photo metadata online free**. You can securely **read exif data from jpg online no software** required. This is an excellent **online exif reader no signup** needed, allowing you to instantly **what metadata is in my photo online check** and even **read iptc xmp data from image free online**.",
+      "steps": {
+        "heading": "How to View Image Metadata Online",
+        "items": [
+          "**Upload your image:** select a JPG, PNG, WEBP, TIFF, HEIC, or RAW file to use our **exif data reader online free tool**.",
+          "**Metadata loads instantly:** all EXIF fields displayed in organized categories.",
+          "**Explore the data:** use the map to **see gps location from photo** and **check where a photo was taken from metadata**.",
+          "**Export if needed:** download the metadata as a text or JSON file."
+        ]
+      },
+      "features": {
+        "heading": "What Metadata Can You Read?",
+        "items": [
+          "**Location Data:** easily **view gps coordinates in photo online free** and **find location of photo using metadata free** (latitude, longitude, altitude, and timestamp).",
+          "**Camera & Device Data:** instantly **view camera settings from photo free**, including make and model, aperture, shutter speed, and ISO sensitivity.",
+          "**Time Data:** exactly when the photo was taken or digitized.",
+          "**Image Properties:** resolution, pixel dimensions, color space, and orientation.",
+          "**Copyright & Author Data:** check author name, copyright notice, and embedded tags."
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "q": "Can I see the GPS location where a photo was taken?",
+            "a": "Yes. If the image contains GPS metadata, ToolNix displays the exact coordinates and shows the location on an interactive map. This only works for photos that had location services enabled when taken."
+          },
+          {
+            "q": "What image formats are supported?",
+            "a": "JPG/JPEG, PNG, WEBP, TIFF, BMP, HEIC (iPhone), and many RAW formats (CR2, NEF, ARW) are supported for metadata reading."
+          },
+          {
+            "q": "Is my image uploaded to ToolNix servers?",
+            "a": "Your image is processed securely over HTTPS. Files are automatically deleted from our servers within 1 hour. We never store or share your image data."
+          },
+          {
+            "q": "What is the difference between EXIF, IPTC, and XMP?",
+            "a": "**EXIF** stores technical camera data (settings, GPS, timestamps). **IPTC** stores editorial information (captions, keywords, copyright — used by news agencies). **XMP** is Adobe's extensible metadata standard (ratings, edits, Lightroom adjustments). ToolNix reads and displays all three."
+          },
+          {
+            "q": "How do I remove the metadata after viewing it?",
+            "a": "After reviewing your metadata, use our Remove EXIF tool to strip all hidden data from the image before sharing it."
+          },
+          {
+            "q": "Can I view metadata from a screenshot?",
+            "a": "Screenshots contain limited metadata — mostly image dimensions and color space. GPS and camera data are only present in photos taken with a camera or phone."
+          }
+        ]
+      }
+    }
+  },
   "remove-exif": {
     "keywords": "remove exif data online free, strip exif data from image, remove metadata from photo online, exif remover free online, delete exif data from jpg free, remove gps from photo online free, remove exif data from photo before sharing online, how to remove location data from photo free, strip metadata from image online no signup, remove hidden data from jpg online free, exif data remover tool free no registration, remove camera metadata from photo free online, delete gps coordinates from photo online, how to remove exif data from iphone photos free, remove exif data from image batch free online, privacy photo cleaner free online tool",
     "metaTitle": "Remove EXIF Data from Images Free Online — No Signup | ToolNix",

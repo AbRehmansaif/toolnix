@@ -14,65 +14,65 @@ import '../../styles/FaviconGenerator.css';
 // ── Icon size definitions ──────────────────────────────────────────────────────
 
 const FAVICON_SIZES = [
-  { size: 16,  label: 'favicon-16',  desc: 'Browser tab (tiny)',    group: 'favicon' },
-  { size: 32,  label: 'favicon-32',  desc: 'Browser tab (normal)',  group: 'favicon' },
-  { size: 48,  label: 'favicon-48',  desc: 'Windows site icon',     group: 'favicon' },
-  { size: 64,  label: 'favicon-64',  desc: 'Shortcut icon',         group: 'favicon' },
+  { size: 16, label: 'favicon-16', desc: 'Browser tab (tiny)', group: 'favicon' },
+  { size: 32, label: 'favicon-32', desc: 'Browser tab (normal)', group: 'favicon' },
+  { size: 48, label: 'favicon-48', desc: 'Windows site icon', group: 'favicon' },
+  { size: 64, label: 'favicon-64', desc: 'Shortcut icon', group: 'favicon' },
 ];
 
 const IOS_SIZES = [
-  { size: 57,   label: 'apple-touch-icon',          desc: 'iPhone (non-retina)',       group: 'ios' },
-  { size: 60,   label: 'apple-touch-icon-60',        desc: 'iPhone (iOS 7+)',           group: 'ios' },
-  { size: 72,   label: 'apple-touch-icon-72',        desc: 'iPad (non-retina)',         group: 'ios' },
-  { size: 76,   label: 'apple-touch-icon-76',        desc: 'iPad (iOS 7)',              group: 'ios' },
-  { size: 114,  label: 'apple-touch-icon-114',       desc: 'iPhone retina',            group: 'ios' },
-  { size: 120,  label: 'apple-touch-icon-120',       desc: 'iPhone retina (iOS 7)',    group: 'ios' },
-  { size: 144,  label: 'apple-touch-icon-144',       desc: 'iPad retina',              group: 'ios' },
-  { size: 152,  label: 'apple-touch-icon-152',       desc: 'iPad retina (iOS 7)',      group: 'ios' },
-  { size: 180,  label: 'apple-touch-icon-180',       desc: 'iPhone 6 Plus',            group: 'ios' },
+  { size: 57, label: 'apple-touch-icon', desc: 'iPhone (non-retina)', group: 'ios' },
+  { size: 60, label: 'apple-touch-icon-60', desc: 'iPhone (iOS 7+)', group: 'ios' },
+  { size: 72, label: 'apple-touch-icon-72', desc: 'iPad (non-retina)', group: 'ios' },
+  { size: 76, label: 'apple-touch-icon-76', desc: 'iPad (iOS 7)', group: 'ios' },
+  { size: 114, label: 'apple-touch-icon-114', desc: 'iPhone retina', group: 'ios' },
+  { size: 120, label: 'apple-touch-icon-120', desc: 'iPhone retina (iOS 7)', group: 'ios' },
+  { size: 144, label: 'apple-touch-icon-144', desc: 'iPad retina', group: 'ios' },
+  { size: 152, label: 'apple-touch-icon-152', desc: 'iPad retina (iOS 7)', group: 'ios' },
+  { size: 180, label: 'apple-touch-icon-180', desc: 'iPhone 6 Plus', group: 'ios' },
 ];
 
 const ANDROID_SIZES = [
-  { size: 36,  label: 'android-icon-36',  desc: 'LDPI (0.75x)',    group: 'android' },
-  { size: 48,  label: 'android-icon-48',  desc: 'MDPI (1x)',       group: 'android' },
-  { size: 72,  label: 'android-icon-72',  desc: 'HDPI (1.5x)',     group: 'android' },
-  { size: 96,  label: 'android-icon-96',  desc: 'XHDPI (2x)',      group: 'android' },
-  { size: 144, label: 'android-icon-144', desc: 'XXHDPI (3x)',     group: 'android' },
-  { size: 192, label: 'android-icon-192', desc: 'XXXHDPI / PWA',   group: 'android' },
+  { size: 36, label: 'android-icon-36', desc: 'LDPI (0.75x)', group: 'android' },
+  { size: 48, label: 'android-icon-48', desc: 'MDPI (1x)', group: 'android' },
+  { size: 72, label: 'android-icon-72', desc: 'HDPI (1.5x)', group: 'android' },
+  { size: 96, label: 'android-icon-96', desc: 'XHDPI (2x)', group: 'android' },
+  { size: 144, label: 'android-icon-144', desc: 'XXHDPI (3x)', group: 'android' },
+  { size: 192, label: 'android-icon-192', desc: 'XXXHDPI / PWA', group: 'android' },
   { size: 512, label: 'android-icon-512', desc: 'Play Store / PWA', group: 'android' },
 ];
 
 const WINDOWS_SIZES = [
-  { size: 70,  label: 'ms-icon-70',  desc: 'Small tile',   group: 'windows' },
-  { size: 144, label: 'ms-icon-144', desc: 'Medium tile',  group: 'windows' },
-  { size: 150, label: 'ms-icon-150', desc: 'Large tile',   group: 'windows' },
-  { size: 310, label: 'ms-icon-310', desc: 'Wide tile',    group: 'windows' },
+  { size: 70, label: 'ms-icon-70', desc: 'Small tile', group: 'windows' },
+  { size: 144, label: 'ms-icon-144', desc: 'Medium tile', group: 'windows' },
+  { size: 150, label: 'ms-icon-150', desc: 'Large tile', group: 'windows' },
+  { size: 310, label: 'ms-icon-310', desc: 'Wide tile', group: 'windows' },
 ];
 
 const MACOS_SIZES = [
-  { size: 16,   label: 'mac-icon-16',   desc: '16×16',     group: 'macos' },
-  { size: 32,   label: 'mac-icon-32',   desc: '32×32',     group: 'macos' },
-  { size: 64,   label: 'mac-icon-64',   desc: '64×64',     group: 'macos' },
-  { size: 128,  label: 'mac-icon-128',  desc: '128×128',   group: 'macos' },
-  { size: 256,  label: 'mac-icon-256',  desc: '256×256',   group: 'macos' },
-  { size: 512,  label: 'mac-icon-512',  desc: '512×512',   group: 'macos' },
+  { size: 16, label: 'mac-icon-16', desc: '16×16', group: 'macos' },
+  { size: 32, label: 'mac-icon-32', desc: '32×32', group: 'macos' },
+  { size: 64, label: 'mac-icon-64', desc: '64×64', group: 'macos' },
+  { size: 128, label: 'mac-icon-128', desc: '128×128', group: 'macos' },
+  { size: 256, label: 'mac-icon-256', desc: '256×256', group: 'macos' },
+  { size: 512, label: 'mac-icon-512', desc: '512×512', group: 'macos' },
   { size: 1024, label: 'mac-icon-1024', desc: '1024×1024 (App Store)', group: 'macos' },
 ];
 
 const PWA_SIZES = [
-  { size: 192, label: 'pwa-icon-192', desc: 'PWA icon (192)',  group: 'pwa' },
-  { size: 512, label: 'pwa-icon-512', desc: 'PWA icon (512)',  group: 'pwa' },
+  { size: 192, label: 'pwa-icon-192', desc: 'PWA icon (192)', group: 'pwa' },
+  { size: 512, label: 'pwa-icon-512', desc: 'PWA icon (512)', group: 'pwa' },
 ];
 
 const ALL_SIZES = [...FAVICON_SIZES, ...IOS_SIZES, ...ANDROID_SIZES, ...WINDOWS_SIZES, ...MACOS_SIZES, ...PWA_SIZES];
 
 const GROUP_META = {
-  favicon:  { label: 'Website Favicon',  icon: Globe,       color: '#e54040', bg: '#fef2f2' },
-  ios:      { label: 'iOS / Apple',      icon: Apple,       color: '#1a1a2e', bg: '#f3f4f6' },
-  android:  { label: 'Android',          icon: Smartphone,  color: '#22c55e', bg: '#f0fdf4' },
-  windows:  { label: 'Windows / MS Edge', icon: Monitor,   color: '#0078d4', bg: '#eff6ff' },
-  macos:    { label: 'macOS',            icon: Monitor,     color: '#6366f1', bg: '#eef2ff' },
-  pwa:      { label: 'PWA',              icon: Zap,         color: '#f59e0b', bg: '#fffbeb' },
+  favicon: { label: 'Website Favicon', icon: Globe, color: '#e54040', bg: '#fef2f2' },
+  ios: { label: 'iOS / Apple', icon: Apple, color: '#1a1a2e', bg: '#f3f4f6' },
+  android: { label: 'Android', icon: Smartphone, color: '#22c55e', bg: '#f0fdf4' },
+  windows: { label: 'Windows / MS Edge', icon: Monitor, color: '#0078d4', bg: '#eff6ff' },
+  macos: { label: 'macOS', icon: Monitor, color: '#6366f1', bg: '#eef2ff' },
+  pwa: { label: 'PWA', icon: Zap, color: '#f59e0b', bg: '#fffbeb' },
 };
 
 // ── Helper: draw image onto canvas with custom settings ──────────────────────
@@ -155,7 +155,7 @@ async function drawIconToCanvas(imgSrc, size, options) {
 function buildHtmlSnippet({ msColor, hasDarkIcon, framework = 'html' }) {
   let prefix = '/favicons/';
   let rootPrefix = '/';
-  
+
   if (framework === 'laravel') {
     prefix = `{{ asset('favicons/`;
     rootPrefix = `{{ asset('`;
@@ -266,13 +266,13 @@ function getContrastColor(hexColor) {
 
 // ── Main Component ────────────────────────────────────────────────────────────
 export default function FaviconGenerator() {
-  const [file, setFile]           = useState(null);
+  const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [drag, setDrag]           = useState(false);
-  const [status, setStatus]       = useState('idle'); // idle | generating | done
-  const [progress, setProgress]   = useState(0);
+  const [drag, setDrag] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | generating | done
+  const [progress, setProgress] = useState(0);
   const [generated, setGenerated] = useState({}); // { label: blobUrl }
-  const [copied, setCopied]       = useState(false);
+  const [copied, setCopied] = useState(false);
   const [activePanel, setActivePanel] = useState('icons'); // icons | logo | snippet
   const [activeTab, setActiveTab] = useState('favicon');
 
@@ -316,10 +316,10 @@ export default function FaviconGenerator() {
   const [navbarLogoShape, setNavbarLogoShape] = useState('rounded'); // 'none' | 'square' | 'rounded' | 'circle'
 
   const [snippetFramework, setSnippetFramework] = useState('html');
-  
+
   // Crop states
   const [isCropping, setIsCropping] = useState(false);
-  const [crop, setCrop]             = useState({ unit: '%', width: 90, height: 90, x: 5, y: 5 });
+  const [crop, setCrop] = useState({ unit: '%', width: 90, height: 90, x: 5, y: 5 });
   const imgRef = useRef(null);
 
   const inputRef = useRef();
@@ -372,7 +372,7 @@ export default function FaviconGenerator() {
     }
     const canvas = document.createElement('canvas');
     const image = imgRef.current;
-    
+
     let cropPx = { x: 0, y: 0, width: 0, height: 0 };
     if (crop.unit === '%') {
       cropPx.x = (crop.x / 100) * image.naturalWidth;
@@ -387,11 +387,11 @@ export default function FaviconGenerator() {
       cropPx.width = crop.width * scaleX;
       cropPx.height = crop.height * scaleY;
     }
-    
+
     canvas.width = cropPx.width;
     canvas.height = cropPx.height;
     const ctx = canvas.getContext('2d');
-    
+
     ctx.drawImage(
       image,
       cropPx.x,
@@ -403,13 +403,13 @@ export default function FaviconGenerator() {
       canvas.width,
       canvas.height
     );
-    
+
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
     if (!blob) {
       setIsCropping(false);
       return;
     }
-    
+
     const newUrl = URL.createObjectURL(blob);
     setPreviewUrl(newUrl);
     const newFile = new File([blob], file.name, { type: 'image/png' });
@@ -425,7 +425,7 @@ export default function FaviconGenerator() {
 
     try {
       const results = {};
-      
+
       // Determine size array (including dark icons if custom uploaded)
       const sizesList = [...ALL_SIZES];
       if (darkIconMode === 'custom' && darkPreviewUrl) {
@@ -434,7 +434,7 @@ export default function FaviconGenerator() {
           { size: 32, label: 'favicon-dark-32', desc: 'Dark theme browser tab (normal)', group: 'favicon' }
         );
       }
-      
+
       const total = sizesList.length;
       let done = 0;
 
@@ -451,7 +451,7 @@ export default function FaviconGenerator() {
 
         // 2. Build draw options
         let options = { mode: 'as-is', bgColor: '#ffffff', borderRadius: 0, imageSize: 80, brightness: 100 };
-        
+
         if (def.group === 'favicon') {
           options = {
             mode: classicMode,
@@ -562,7 +562,7 @@ export default function FaviconGenerator() {
   const getNavbarStyle = () => {
     let bg = '#ffffff';
     let color = '#0f172a';
-    
+
     if (navbarPreset === -1) {
       bg = customNavbarBg;
       color = customNavbarText;
@@ -577,7 +577,7 @@ export default function FaviconGenerator() {
       bg = presets[navbarPreset]?.bg || bg;
       color = presets[navbarPreset]?.textColor || color;
     }
-    
+
     return {
       background: bg,
       color: color,
@@ -611,7 +611,7 @@ export default function FaviconGenerator() {
     }
 
     const canvas = document.createElement('canvas');
-    canvas.width  = 640;
+    canvas.width = 640;
     canvas.height = 80;
     const ctx = canvas.getContext('2d');
 
@@ -630,12 +630,12 @@ export default function FaviconGenerator() {
     img.onload = () => {
       const boxSize = 48;
       const iconPad = 16;
-      
+
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = boxSize;
       tempCanvas.height = boxSize;
       const tempCtx = tempCanvas.getContext('2d');
-      
+
       const drawOpts = {
         mode: classicMode,
         bgColor: classicBgColor,
@@ -643,7 +643,7 @@ export default function FaviconGenerator() {
         imageSize: classicImageSize,
         brightness: classicBrightness
       };
-      
+
       if (drawOpts.mode === 'bg') {
         tempCtx.fillStyle = drawOpts.bgColor || '#ffffff';
         if (drawOpts.borderRadius > 0) {
@@ -664,17 +664,17 @@ export default function FaviconGenerator() {
           tempCtx.fillRect(0, 0, boxSize, boxSize);
         }
       }
-      
+
       let innerSize = boxSize;
       if (drawOpts.mode === 'bg') {
         innerSize = boxSize * (drawOpts.imageSize / 100);
       }
       const innerPad = (boxSize - innerSize) / 2;
-      
+
       if (drawOpts.mode === 'brightness') {
         tempCtx.filter = `brightness(${drawOpts.brightness}%)`;
       }
-      
+
       const imgAspect = img.width / img.height;
       let w = innerSize;
       let h = innerSize;
@@ -685,21 +685,21 @@ export default function FaviconGenerator() {
       }
       const x = innerPad + (innerSize - w) / 2;
       const y = innerPad + (innerSize - h) / 2;
-      
+
       tempCtx.drawImage(img, x, y, w, h);
       tempCtx.filter = 'none';
-      
+
       ctx.drawImage(tempCanvas, iconPad, (80 - boxSize) / 2);
 
       if (navbarBrandName) {
         ctx.fillStyle = currentText;
-        ctx.font      = 'bold 26px Inter, sans-serif';
+        ctx.font = 'bold 26px Inter, sans-serif';
         ctx.fillText(navbarBrandName, iconPad + boxSize + 14, 50);
       }
 
       const url = canvas.toDataURL('image/png');
       const a = document.createElement('a');
-      a.href     = url;
+      a.href = url;
       a.download = 'website-logo.png';
       document.body.appendChild(a);
       a.click();
@@ -809,7 +809,7 @@ export default function FaviconGenerator() {
 
       {/* Main layout */}
       <div className="tool-main" style={{ gridTemplateColumns: '1fr' }}>
-        
+
         {/* Upload zone */}
         {!file ? (
           <div
@@ -835,7 +835,7 @@ export default function FaviconGenerator() {
             <div style={{ fontSize: 14, color: '#64748b', marginBottom: 20 }}>
               Drag a box to trim excess whitespace around your logo. We will automatically center it perfectly inside your favicons!
             </div>
-            
+
             <div style={{ background: '#f8fafc', borderRadius: 8, padding: 20, display: 'inline-block', maxWidth: '100%', marginBottom: 20, border: '1px dashed #cbd5e1' }}>
               <ReactCrop
                 crop={crop}
@@ -973,7 +973,7 @@ export default function FaviconGenerator() {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 14 }}>
                     {[
                       { bg: '#ffffff', border: '1px solid #e2e8f0', label: 'Light', shadow: '0 2px 8px rgba(0,0,0,0.06)' },
-                      { bg: '#0f172a', border: '1px solid #1e293b', label: 'Dark',  shadow: '0 2px 8px rgba(0,0,0,0.25)' },
+                      { bg: '#0f172a', border: '1px solid #1e293b', label: 'Dark', shadow: '0 2px 8px rgba(0,0,0,0.25)' },
                       { bg: navbarLogoBg === 'transparent' ? 'repeating-conic-gradient(#e2e8f0 0% 25%, transparent 0% 50%) 0 0 / 10px 10px' : navbarLogoBg, border: '1px solid #e2e8f0', label: 'Custom', shadow: '0 2px 8px rgba(0,0,0,0.08)' },
                       { bg: 'repeating-conic-gradient(#e2e8f0 0% 25%, transparent 0% 50%) 0 0 / 10px 10px', border: '1px dashed #cbd5e1', label: 'No BG', shadow: 'none' },
                     ].map(({ bg, border, label, shadow }) => (
@@ -995,7 +995,7 @@ export default function FaviconGenerator() {
                   <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
                     {[
                       { bg: '#ffffff', textColor: '#0f172a', border: '1px solid #e2e8f0', label: 'Light' },
-                      { bg: '#0f172a', textColor: '#ffffff',  border: '1px solid #1e293b', label: 'Dark' },
+                      { bg: '#0f172a', textColor: '#ffffff', border: '1px solid #1e293b', label: 'Dark' },
                     ].map(({ bg, textColor, border, label }) => (
                       <div key={label} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, background: bg, border, borderRadius: 8, padding: '8px 12px', minWidth: 0 }}>
                         <div style={{
@@ -1015,7 +1015,7 @@ export default function FaviconGenerator() {
                   <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
                     {[
                       { bg: '#ffffff', textColor: '#0f172a', border: '1px solid #e2e8f0' },
-                      { bg: '#0f172a', textColor: '#ffffff',  border: '1px solid #1e293b' },
+                      { bg: '#0f172a', textColor: '#ffffff', border: '1px solid #1e293b' },
                     ].map(({ bg, textColor, border }, i) => (
                       <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, background: bg, border, borderRadius: 8, padding: '10px 8px', minWidth: 0 }}>
                         <div style={{
@@ -1068,7 +1068,7 @@ export default function FaviconGenerator() {
                         <input type="radio" name="classicMode" checked={classicMode === 'as-is'} onChange={() => setClassicMode('as-is')} />
                         Use the icon as is
                       </label>
-                      
+
                       <label className="settings-radio-label">
                         <input type="radio" name="classicMode" checked={classicMode === 'bg'} onChange={() => setClassicMode('bg')} />
                         Add a plain background and margins

@@ -19,16 +19,16 @@ function readImageMeta(file) {
       'File Type': file.type,
       'Last Modified': new Date(file.lastModified).toLocaleString(),
     };
-    
+
     try {
       const exifData = await exifr.parse(file, true);
       if (exifData) {
         for (const [key, value] of Object.entries(exifData)) {
-           if (typeof value !== 'object' && !Array.isArray(value)) {
-               meta[key] = String(value);
-           } else if (Array.isArray(value)) {
-               meta[key] = value.join(', ');
-           }
+          if (typeof value !== 'object' && !Array.isArray(value)) {
+            meta[key] = String(value);
+          } else if (Array.isArray(value)) {
+            meta[key] = value.join(', ');
+          }
         }
       }
     } catch (e) {

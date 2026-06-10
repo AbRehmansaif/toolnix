@@ -21,10 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mep$cfxiz+5sw!^zit&0in!6v)g83^vn+xu=c7r+0epl_6!b)l'
+# Set DJANGO_SECRET_KEY env var on the server. The fallback is dev-only.
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-mep$cfxiz+5sw!^zit&0in!6v)g83^vn+xu=c7r+0epl_6!b)l'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Set DJANGO_DEBUG=False on the server.
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 # Relax ALLOWED_HOSTS for now since Nginx handles domain routing
 ALLOWED_HOSTS = ['*']
@@ -49,6 +54,7 @@ INSTALLED_APPS = [
     'blogs',
     'ckeditor',
     'ckeditor_uploader',
+    'seo',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +156,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Path to the built React frontend (index.html)
+# Override with FRONTEND_DIST_PATH env var on the server
+FRONTEND_DIST_PATH = os.environ.get('FRONTEND_DIST_PATH', '/var/www/toolnix.pro/html')

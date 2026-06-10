@@ -3,38 +3,38 @@ import { Palette, Copy, ChevronRight, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import '../../styles/ToolPage.css';
 
-function clamp(v, min=0, max=255) { return Math.max(min, Math.min(max, Math.round(Number(v) || 0))); }
+function clamp(v, min = 0, max = 255) { return Math.max(min, Math.min(max, Math.round(Number(v) || 0))); }
 
 function rgbToHex(r, g, b) {
-  return '#' + [r,g,b].map(v => clamp(v).toString(16).padStart(2,'0')).join('').toUpperCase();
+  return '#' + [r, g, b].map(v => clamp(v).toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r,g,b), min = Math.min(r,g,b);
-  let h, s, l = (max+min)/2;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
   if (max === min) { h = s = 0; }
   else {
-    const d = max-min;
-    s = l>0.5 ? d/(2-max-min) : d/(max+min);
-    switch(max) {
-      case r: h=((g-b)/d+(g<b?6:0))/6; break;
-      case g: h=((b-r)/d+2)/6; break;
-      default: h=((r-g)/d+4)/6;
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      default: h = ((r - g) / d + 4) / 6;
     }
   }
-  return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
 const EXAMPLES = [
-  { r:229, g:64, b:64 },
-  { r:59, g:130, b:246 },
-  { r:34, g:197, b:94 },
-  { r:249, g:115, b:22 },
-  { r:168, g:85, b:247 },
-  { r:236, g:72, b:153 },
-  { r:20, g:184, b:166 },
-  { r:26, g:26, b:46 },
+  { r: 229, g: 64, b: 64 },
+  { r: 59, g: 130, b: 246 },
+  { r: 34, g: 197, b: 94 },
+  { r: 249, g: 115, b: 22 },
+  { r: 168, g: 85, b: 247 },
+  { r: 236, g: 72, b: 153 },
+  { r: 20, g: 184, b: 166 },
+  { r: 26, g: 26, b: 46 },
 ];
 
 export default function RgbToHex() {
@@ -114,7 +114,7 @@ export default function RgbToHex() {
             transition: 'background 0.2s, box-shadow 0.2s',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 28, fontWeight: 800, fontFamily: 'monospace',
-            color: (0.299*r + 0.587*g + 0.114*b) < 128 ? '#fff' : '#1a1a2e',
+            color: (0.299 * r + 0.587 * g + 0.114 * b) < 128 ? '#fff' : '#1a1a2e',
           }}>
             {hex}
           </div>
@@ -162,7 +162,7 @@ export default function RgbToHex() {
                       onClick={() => { setR(ex.r); setG(ex.g); setB(ex.b); }}
                       style={{
                         display: 'flex', alignItems: 'center', gap: 10,
-                        padding: '8px 12px', background: (r===ex.r&&g===ex.g&&b===ex.b) ? 'var(--color-bg)' : 'transparent',
+                        padding: '8px 12px', background: (r === ex.r && g === ex.g && b === ex.b) ? 'var(--color-bg)' : 'transparent',
                         border: '1px solid var(--color-border)', borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit',
                       }}
                     >
@@ -175,7 +175,7 @@ export default function RgbToHex() {
               <button
                 className="tool-action-btn"
                 style={{ marginTop: 16 }}
-                onClick={() => { setR(Math.floor(Math.random()*256)); setG(Math.floor(Math.random()*256)); setB(Math.floor(Math.random()*256)); }}
+                onClick={() => { setR(Math.floor(Math.random() * 256)); setG(Math.floor(Math.random() * 256)); setB(Math.floor(Math.random() * 256)); }}
               >
                 <RefreshCw size={16} /> Random Color
               </button>

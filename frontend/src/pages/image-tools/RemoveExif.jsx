@@ -33,12 +33,12 @@ export default function RemoveExif() {
     if (!files.length) return;
     setStatus('processing');
     setProgress(0);
-    
+
     const newResults = [];
-    
+
     for (let i = 0; i < files.length; i++) {
       const f = files[i];
-      
+
       try {
         const blob = await new Promise((resolve, reject) => {
           const canvas = document.createElement('canvas');
@@ -67,7 +67,7 @@ export default function RemoveExif() {
 
       setProgress(Math.round(((i + 1) / files.length) * 100));
     }
-    
+
     setResults(newResults);
     setStatus('done');
   };

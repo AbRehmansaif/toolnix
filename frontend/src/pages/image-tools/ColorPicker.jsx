@@ -4,39 +4,39 @@ import { Link } from 'react-router-dom';
 import '../../styles/ToolPage.css';
 
 const PALETTE = [
-  '#e54040','#f97316','#eab308','#22c55e','#14b8a6','#3b82f6',
-  '#6366f1','#a855f7','#ec4899','#1a1a2e','#64748b','#ffffff',
-  '#f1f5f9','#fef9c3','#fce7f3','#ede9fe','#dbeafe','#dcfce7',
+  '#e54040', '#f97316', '#eab308', '#22c55e', '#14b8a6', '#3b82f6',
+  '#6366f1', '#a855f7', '#ec4899', '#1a1a2e', '#64748b', '#ffffff',
+  '#f1f5f9', '#fef9c3', '#fce7f3', '#ede9fe', '#dbeafe', '#dcfce7',
 ];
 
 function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
   return { r, g, b };
 }
 
 function hexToHsl(hex) {
   let { r, g, b } = hexToRgb(hex);
   r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r,g,b), min = Math.min(r,g,b);
-  let h, s, l = (max+min)/2;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
   if (max === min) { h = s = 0; }
   else {
     const d = max - min;
-    s = l > 0.5 ? d/(2-max-min) : d/(max+min);
-    switch(max) {
-      case r: h = ((g-b)/d + (g<b?6:0))/6; break;
-      case g: h = ((b-r)/d + 2)/6; break;
-      default: h = ((r-g)/d + 4)/6;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      default: h = ((r - g) / d + 4) / 6;
     }
   }
-  return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
 function isDark(hex) {
-  const { r,g,b } = hexToRgb(hex);
-  return (0.299*r + 0.587*g + 0.114*b) < 128;
+  const { r, g, b } = hexToRgb(hex);
+  return (0.299 * r + 0.587 * g + 0.114 * b) < 128;
 }
 
 export default function ColorPicker() {
@@ -115,9 +115,9 @@ export default function ColorPicker() {
                 overflow: 'hidden',
                 transition: 'transform 0.15s ease',
               }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-              title="Open color picker"
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                title="Open color picker"
               >
                 {/* Hue ring overlay hint */}
                 <div style={{ width: 24, height: 24, borderRadius: '50%', border: `3px solid ${isDark(color) ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -215,7 +215,7 @@ export default function ColorPicker() {
                     const x = (e.clientX - rect.left) * (img.naturalWidth / rect.width);
                     const y = (e.clientY - rect.top) * (img.naturalHeight / rect.height);
                     const [rv, gv, bv] = canvas.getContext('2d').getImageData(x, y, 1, 1).data;
-                    setColor('#' + [rv,gv,bv].map(v => v.toString(16).padStart(2,'0')).join(''));
+                    setColor('#' + [rv, gv, bv].map(v => v.toString(16).padStart(2, '0')).join(''));
                   }}
                 />
                 <button className="file-item-remove" style={{ position: 'absolute', top: 8, right: 8, background: 'white', borderRadius: '50%', padding: 4 }}

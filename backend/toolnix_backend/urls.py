@@ -15,11 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from seo.views import serve_frontend
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('converter.urls')),
     path('api/blogs/', include('blogs.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # ── Frontend catch-all ────────────────────────────────────────────────────
+    # Every non-API URL is served by Django with SEO meta tags injected.
+    # Static assets (JS, CSS, images) are served directly by Nginx — never reach here.
+    re_path(r'^.*$', serve_frontend),
 ]

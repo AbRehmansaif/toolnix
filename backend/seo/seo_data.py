@@ -661,4 +661,53 @@ SEO_DATA = {
             ],
         },
     },
+    'color-picker': {
+        'title': 'Color Picker Online Free — HEX RGB HSL Color Codes | ToolNix',
+        'description': 'Pick colors online for free. Get HEX, RGB, HSL, CMYK codes instantly. Extract color from any image. Build palettes, convert formats, check contrast. No signup.',
+        'keywords': 'color picker online free, hex color picker online free, rgb color picker free, html color picker free online, color code finder online, pick color from image online free, online color picker with hex rgb and hsl, color picker from image online free, html hex color picker no signup, pick color code from website screenshot free, color palette generator from image free, color picker for web design free online, css color picker online free tool, eyedropper tool online free no download, color picker with cmyk values free, wcag color contrast checker free online, find color code from image online free, color picker tool for designers free, hex color code finder from image online, color picker online free for developers',
+        'json_ld': {
+            '@context': 'https://schema.org',
+            '@graph': [
+                {
+                    '@type': 'SoftwareApplication',
+                    'name': 'Color Picker — ToolNix',
+                    'url': 'https://toolnix.pro/tools/color-picker',
+                    'applicationCategory': 'DeveloperApplication',
+                    'operatingSystem': 'Web Browser',
+                    'description': 'Free online color picker. Get HEX, RGB, HSL, CMYK color codes instantly. Pick colors from any image with eyedropper. WCAG contrast checker included.',
+                    'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
+                    'featureList': [
+                        'HEX, RGB, HSL, RGBA, CMYK color codes',
+                        'Pick color from uploaded image',
+                        'Color format converter',
+                        'WCAG contrast checker',
+                        'Color palette builder',
+                        'Color harmony suggestions',
+                        'No registration required',
+                    ],
+                },
+                {
+                    '@type': 'FAQPage',
+                    'mainEntity': [
+                        {
+                            '@type': 'Question',
+                            'name': 'How do I find the HEX color code of any color online for free?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Open ToolNix Color Picker and either select a color from the gradient, enter a known value, or upload an image and use the eyedropper to click any pixel. The HEX, RGB, and HSL codes appear instantly.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'How do I pick a color from a website or image?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Take a screenshot of the website or image, upload it to ToolNix Color Picker\'s image eyedropper, and click on any color to get its HEX and RGB codes immediately.',
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+    },
 }

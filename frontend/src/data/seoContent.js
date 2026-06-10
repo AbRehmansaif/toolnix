@@ -2243,5 +2243,58 @@ export const seoData = {
         ]
       }
     }
+  },
+  "color-picker": {
+    "keywords": "color picker online free, hex color picker online free, rgb color picker free, html color picker free online, color code finder online, pick color from image online free, online color picker with hex rgb and hsl, color picker from image online free, html hex color picker no signup, pick color code from website screenshot free, color palette generator from image free, color picker for web design free online, css color picker online free tool, eyedropper tool online free no download, color picker with cmyk values free, wcag color contrast checker free online, find color code from image online free, color picker tool for designers free, hex color code finder from image online, color picker online free for developers",
+    "metaTitle": "Color Picker Online Free — HEX RGB HSL Color Codes | ToolNix",
+    "metaDescription": "Pick colors online for free. Get HEX, RGB, HSL, CMYK codes instantly. Extract color from any image. Build palettes, convert formats, check contrast. No signup.",
+    "article": {
+      "intro": "Looking for the best **color picker online free**? ToolNix provides an advanced **html color picker free online** that helps you instantly get HEX, RGB, HSL, and CMYK color codes. If you need a reliable **color code finder online**, our tool includes an **eyedropper tool online free no download** required, allowing you to easily **pick color from image online free**. Whether you want an **online color picker with hex rgb and hsl** or a **color picker with cmyk values free**, this **color picker tool for designers free** has you covered. It serves perfectly as a **color picker for web design free online**, letting you seamlessly **find color code from image online free** or act as an efficient **css color picker online free tool**. Easily **pick color code from website screenshot free** and try our built-in **wcag color contrast checker free online** today.",
+      "steps": {
+        "heading": "How to Use the Color Picker",
+        "items": [
+          "**Pick from the gradient:** click anywhere on the color wheel or spectrum to select a color using our **hex color picker online free**.",
+          "**Or enter a value:** type a HEX code, RGB value, CSS color name, or HSL value into our **html hex color picker no signup**.",
+          "**Or upload an image:** hover over any pixel with the eyedropper to sample its exact color and **hex color code finder from image online**.",
+          "**Copy your code:** click any value to copy HEX, RGB, HSL, or CMYK in one click the perfect **color picker online free for developers**."
+        ]
+      },
+      "features": {
+        "heading": "Features & Color Formats Provided",
+        "items": [
+          "**Visual gradient picker:** full hue, saturation, and brightness control.",
+          "**Eyedropper from image:** instantly **color picker from image online free**.",
+          "**Color format converter:** convert between HEX (`#3B82F6`), RGB (`rgb(59, 130, 246)`), HSL (`hsl(217, 91%, 60%)`), and CMYK (`C:76 M:47 Y:0 K:4`).",
+          "**Palette builder:** save multiple colors in a session using the **color palette generator from image free**.",
+          "**Contrast checker:** WCAG AA/AAA accessibility contrast ratio for text colors.",
+          "**Recent colors history:** last 10 selected colors saved in session."
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "q": "How do I find the color code from a website or image?",
+            "a": "Take a screenshot, upload it to ToolNix Color Picker's image eyedropper, and click on any color in the image to get its exact HEX, RGB, and HSL codes instantly."
+          },
+          {
+            "q": "What is the difference between HEX, RGB, and HSL?",
+            "a": "**HEX** represents color as a 6 digit hexadecimal code (e.g. #FF5733), the standard for HTML/CSS. **RGB** uses three numbers 0 – 255 for Red, Green, Blue channels (a standard **rgb color picker free**). **HSL** uses Hue (0 – 360°), Saturation (%), and Lightness (%), more intuitive for humans."
+          },
+          {
+            "q": "How do I check if my text color has enough contrast?",
+            "a": "Use the built-in WCAG contrast checker. Select your text color and background color, the tool shows the contrast ratio and whether it passes WCAG AA (4.5:1) or AAA (7:1) accessibility standards."
+          },
+          {
+            "q": "Can I build a full color palette with this tool?",
+            "a": "Yes. Add any color to the palette builder and save a full set for your project. Export your palette as CSS variables, HEX codes, or a PNG swatch image."
+          },
+          {
+            "q": "What is CMYK used for?",
+            "a": "CMYK (Cyan, Magenta, Yellow, Key/Black) is the color model used in print design. If you're preparing designs for physical printing, business cards, brochures, packaging, you'll need CMYK values for the print vendor."
+          }
+        ]
+      }
+    }
   }
 };

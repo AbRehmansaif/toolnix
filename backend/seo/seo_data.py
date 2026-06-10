@@ -710,4 +710,60 @@ SEO_DATA = {
             ],
         },
     },
+    'rgb-to-hex': {
+        'title': 'RGB to HEX Converter Free Online - Color Code Tool | ToolNix',
+        'description': 'Convert RGB to HEX color codes online for free. Enter R, G, B values and instantly get the HEX code. Supports RGBA to HEX with alpha. Free, fast, no signup.',
+        'keywords': 'rgb to hex converter online free, rgb to hex color code, convert rgb to hex online, rgb to hex calculator free, rgb color to hex code online, rgba to hex converter free, rgb to hex converter online free no signup, convert rgb values to hex code free, rgb to hex color converter for web design, how to convert rgb to hex code manually, rgba to hex with transparency converter, rgb 255 to hex online free, rgb to hex real time converter online, rgb(255 87 51) to hex online free, rgb to hex css color code converter, best rgb to hex converter online free, rgb to hex and hsl converter free, rgb to hex converter for developers free',
+        'json_ld': {
+            '@context': 'https://schema.org',
+            '@graph': [
+                {
+                    '@type': 'SoftwareApplication',
+                    'name': 'RGB to HEX Converter — ToolNix',
+                    'url': 'https://toolnix.pro/tools/rgb-to-hex',
+                    'applicationCategory': 'DeveloperApplication',
+                    'operatingSystem': 'Web Browser',
+                    'description': 'Free online RGB to HEX color code converter. Enter R, G, B values and instantly get the HEX code. Also converts RGBA to 8-digit HEX. Shows HSL and CMYK simultaneously.',
+                    'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
+                    'featureList': [
+                        'Real-time RGB to HEX conversion',
+                        'RGBA to 8-digit HEX with alpha',
+                        'Shows HEX, HSL, and CMYK simultaneously',
+                        'One-click copy to clipboard',
+                        'Color preview swatch',
+                        'No registration required',
+                    ],
+                },
+                {
+                    '@type': 'FAQPage',
+                    'mainEntity': [
+                        {
+                            '@type': 'Question',
+                            'name': 'How do I convert RGB to HEX online for free?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Enter your Red, Green, and Blue values (0–255 each) in the ToolNix RGB to HEX converter. The HEX code appears instantly in real time. Free, no signup required.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'What is RGB(59, 130, 246) in HEX?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'RGB(59, 130, 246) converts to #3B82F6 in HEX. Red 59 = 3B, Green 130 = 82, Blue 246 = F6.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'Can I convert RGBA to HEX with transparency?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Yes. Enter an RGBA value and ToolNix converts it to an 8-digit HEX code. The last two digits represent the alpha channel — e.g. 50% opacity becomes 80 in hex.',
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+    },
 }

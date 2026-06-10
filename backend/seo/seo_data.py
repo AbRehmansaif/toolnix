@@ -584,7 +584,7 @@ SEO_DATA = {
     'favicon-generator': {
         'title': 'Favicon Generator Free Online — Create Website Icons | ToolNix',
         'description': 'Generate favicon icons for your website free. Upload any image and get ICO, PNG, Apple Touch Icon, and PWA icons in all sizes. No registration. Instant download.',
-        'keywords': 'favicon generator free online, create favicon online free, favicon maker, ico file generator',
+        'keywords': 'favicon generator free online, create favicon online free, favicon maker online free, generate favicon from image free, ico file generator online free, website icon generator free, favicon generator from png free online, how to create a favicon for my website free, favicon generator from image no signup, create ico file from png free online, apple touch icon generator free online, pwa icon generator free online, favicon generator all sizes free download, favicon creator free for wordpress, make a favicon from logo free, generate favicon html code free online, favicon generator 16x16 32x32 free, best free favicon generator online 2025, favicon from text free online tool, create favicon without photoshop free',
         'json_ld': {
             '@context': 'https://schema.org',
             '@graph': [
@@ -613,7 +613,7 @@ SEO_DATA = {
                             'name': 'How do I create a favicon for my website for free?',
                             'acceptedAnswer': {
                                 '@type': 'Answer',
-                                'text': 'Upload your logo or image to ToolNix Favicon Generator, download the ZIP package with all favicon sizes, and paste the provided HTML code into your website head section. Free, no signup required.',
+                                'text': 'Upload your logo or image to ToolNix Favicon Generator, download the ZIP package with all favicon sizes, and paste the provided HTML code into your website\'s head section. Free, no signup required.',
                             },
                         },
                         {

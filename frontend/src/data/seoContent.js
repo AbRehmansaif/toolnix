@@ -2358,5 +2358,71 @@ export const seoData = {
         ]
       }
     }
+  },
+  "hex-to-rgb": {
+    "keywords": "hex to rgb converter online free, hex to rgb color converter, convert hex to rgb online free, hex color to rgb code, hex to rgba converter free, html color code to rgb free, hex to rgb converter online free no signup, convert hex color code to rgb values free, hex to rgb and hsl converter online, hex to rgb real time converter free, 8 digit hex to rgba converter free, 3 digit hex to rgb converter online, html hex to rgb css color converter, hex code to rgb decimal converter free, convert hex to rgb for photoshop free, hex to rgb converter for web designers, hex to rgb and cmyk converter free online, what is #ffffff in rgb online, hex to rgb converter with color preview",
+    "metaTitle": "HEX to RGB Converter Free Online — Color Code Tool | ToolNix",
+    "metaDescription": "Convert HEX color codes to RGB online for free. Enter any HEX value and get RGB, RGBA, HSL, and CMYK instantly. Supports 3-digit and 8-digit HEX. No signup.",
+    "article": {
+      "intro": "Looking for the best **hex to rgb converter online free**? ToolNix provides an instant **hex to rgb color converter** that turns any HEX color code into RGB, RGBA, HSL, and CMYK values in real time. Whether you need to **convert hex to rgb online free** for web development, find a **hex color to rgb code** for a JavaScript or Python project, or use an **html color code to rgb free** tool for design work, ToolNix has you covered. Our **hex to rgba converter free** also supports 8-digit HEX codes with full alpha/opacity output, completely free, no signup required.",
+      "steps": {
+        "heading": "How to Convert HEX to RGB",
+        "items": [
+          "**Enter your HEX code** — type or paste any HEX value (e.g. `#3B82F6` or `3B82F6`) into the input field.",
+          "**Get results instantly** — RGB, RGBA, HSL, and CMYK update in real-time as you type.",
+          "**Copy any value** — click any result to copy it directly to your clipboard."
+        ]
+      },
+      "features": {
+        "heading": "HEX to RGB Conversion Examples",
+        "items": [
+          "🔴 `#FF0000` → `rgb(255, 0, 0)` — Pure Red",
+          "🟢 `#00FF00` → `rgb(0, 255, 0)` — Pure Green",
+          "🔵 `#0000FF` → `rgb(0, 0, 255)` — Pure Blue",
+          "⬛ `#000000` → `rgb(0, 0, 0)` — Black",
+          "⬜ `#FFFFFF` → `rgb(255, 255, 255)` — White",
+          "🟠 `#FF5733` → `rgb(255, 87, 51)` — Popular Orange",
+          "🔷 `#3B82F6` → `rgb(59, 130, 246)` — Tailwind Blue-500",
+          "💜 `#6366F1` → `rgb(99, 102, 241)` — Tailwind Indigo-500"
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "q": "What is #FFFFFF in RGB?",
+            "a": "`#FFFFFF` is `rgb(255, 255, 255)` — pure white. All three channels are at maximum intensity."
+          },
+          {
+            "q": "What is #000000 in RGB?",
+            "a": "`#000000` is `rgb(0, 0, 0)` — pure black. All three channels are at zero."
+          },
+          {
+            "q": "Can I convert an 8-digit HEX code with transparency?",
+            "a": "Yes. Enter an 8-digit HEX code (e.g. `#FF573380`) and ToolNix converts it to RGBA, the last two hex digits (80 = 50% opacity) become the alpha value in `rgba(255, 87, 51, 0.50)`."
+          },
+          {
+            "q": "Does ToolNix also convert 3-digit HEX codes?",
+            "a": "Yes. 3-digit HEX shorthand like `#F53` is automatically expanded to `#FF5533` before converting to `rgb(255, 85, 51)`."
+          },
+          {
+            "q": "How do I use RGB values in CSS?",
+            "a": "In CSS: `color: rgb(59, 130, 246);` or with transparency: `color: rgba(59, 130, 246, 0.5);`. Modern CSS also accepts `color: rgb(59 130 246 / 50%);` syntax."
+          },
+          {
+            "q": "How do I use the RGB value in JavaScript?",
+            "a": "In JavaScript, use the RGB values as separate integers: `const color = { r: 59, g: 130, b: 246 };` or as a CSS string: `element.style.color = 'rgb(59, 130, 246)';`"
+          },
+          {
+            "q": "Why Convert HEX to RGB?",
+            "a": "HEX codes are standard in HTML and CSS for web development. But many design tools, programming languages, and APIs work with RGB values, particularly when you need to manipulate color channels, apply opacity, or pass color values to JavaScript, Python, Flutter, or iOS/Android code. Common scenarios: applying colors from a brand stylesheet into a React component, using CSS hex colors in a Python image processing script, or converting website colors to RGB for use in Photoshop or Illustrator."
+          },
+          {
+            "q": "How does HEX to RGB conversion work?",
+            "a": "A 6-digit HEX code is split into three 2-digit pairs, each representing one color channel. Each pair is converted from base-16 (hexadecimal) to base-10 (decimal) to get the RGB channel value (0–255). Example: `#3B82F6` → Red: 3B₁₆ = 59₁₀, Green: 82₁₆ = 130₁₀, Blue: F6₁₆ = 246₁₀ → `rgb(59, 130, 246)`."
+          }
+        ]
+      }
+    }
   }
 };

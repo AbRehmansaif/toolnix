@@ -269,8 +269,8 @@ SEO_DATA = {
     },
     'hex-to-rgb': {
         'title': 'HEX to RGB Converter Free Online — Color Code Tool | ToolNix',
-        'description': 'Convert HEX color codes to RGB values online for free. Enter any HEX code and instantly get RGB, HSL, and CMYK values. Free, fast, no signup.',
-        'keywords': 'hex to rgb converter online free, hex to rgb color code, convert hex to rgb',
+        'description': 'Convert HEX color codes to RGB online for free. Enter any HEX value and get RGB, RGBA, HSL, and CMYK instantly. Supports 3-digit and 8-digit HEX. No signup.',
+        'keywords': 'hex to rgb converter online free, hex to rgb color converter, convert hex to rgb online free, hex color to rgb code, hex to rgba converter free, html color code to rgb free, hex to rgb converter online free no signup, convert hex color code to rgb values free, hex to rgb and hsl converter online, hex to rgb real time converter free, 8 digit hex to rgba converter free, 3 digit hex to rgb converter online, html hex to rgb css color converter, hex code to rgb decimal converter free, convert hex to rgb for photoshop free, hex to rgb converter for web designers, hex to rgb and cmyk converter free online, what is #ffffff in rgb online, hex to rgb converter with color preview',
         'json_ld': {
             '@context': 'https://schema.org',
             '@graph': [
@@ -759,6 +759,70 @@ SEO_DATA = {
                             'acceptedAnswer': {
                                 '@type': 'Answer',
                                 'text': 'Yes. Enter an RGBA value and ToolNix converts it to an 8-digit HEX code. The last two digits represent the alpha channel — e.g. 50% opacity becomes 80 in hex.',
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    'hex-to-rgb': {
+        'title': 'HEX to RGB Converter Free Online — Color Code Tool | ToolNix',
+        'description': 'Convert HEX color codes to RGB online for free. Enter any HEX value and get RGB, RGBA, HSL, and CMYK instantly. Supports 3-digit and 8-digit HEX. No signup.',
+        'keywords': 'hex to rgb converter online free, hex to rgb color converter, convert hex to rgb online free, hex color to rgb code, hex to rgba converter free, html color code to rgb free, hex to rgb converter online free no signup, convert hex color code to rgb values free, hex to rgb and hsl converter online, #ff5733 to rgb online free, hex to rgb real time converter free, 8 digit hex to rgba converter free, 3 digit hex to rgb converter online, html hex to rgb css color converter, hex code to rgb decimal converter free, convert hex to rgb for photoshop free, hex to rgb converter for web designers, hex to rgb and cmyk converter free online, what is #ffffff in rgb online, hex to rgb converter with color preview',
+        'json_ld': {
+            '@context': 'https://schema.org',
+            '@graph': [
+                {
+                    '@type': 'SoftwareApplication',
+                    'name': 'HEX to RGB Converter — ToolNix',
+                    'url': 'https://toolnix.pro/tools/hex-to-rgb',
+                    'applicationCategory': 'DeveloperApplication',
+                    'operatingSystem': 'Web Browser',
+                    'description': 'Free online HEX to RGB color code converter. Enter any HEX value and instantly get RGB, RGBA, HSL, and CMYK values. Supports 3-digit, 6-digit, and 8-digit HEX codes.',
+                    'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
+                    'featureList': [
+                        'Real-time HEX to RGB conversion',
+                        'Supports 3-digit, 6-digit, and 8-digit HEX',
+                        '8-digit HEX to RGBA with alpha',
+                        'Shows RGB, RGBA, HSL, and CMYK simultaneously',
+                        'Color preview swatch',
+                        'No registration required',
+                    ],
+                },
+                {
+                    '@type': 'FAQPage',
+                    'mainEntity': [
+                        {
+                            '@type': 'Question',
+                            'name': 'How do I convert a HEX color code to RGB online for free?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Enter your HEX code (e.g. #3B82F6) in the ToolNix HEX to RGB converter. The RGB, HSL, and CMYK values appear instantly in real time. Free, no signup required.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'What is #FF5733 in RGB?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': '#FF5733 converts to rgb(255, 87, 51) — Red: FF = 255, Green: 57 = 87, Blue: 33 = 51.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'Can I convert an 8-digit HEX code with alpha to RGBA?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Yes. Enter an 8-digit HEX like #FF573380 and ToolNix converts it to rgba(255, 87, 51, 0.50). The last two hex digits represent the alpha/opacity channel.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'What is #FFFFFF in RGB?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': '#FFFFFF is rgb(255, 255, 255) — pure white.',
                             },
                         },
                     ],

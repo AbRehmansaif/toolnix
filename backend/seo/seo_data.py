@@ -478,7 +478,7 @@ SEO_DATA = {
     'remove-exif': {
         'title': 'Remove EXIF Data from Images Free Online — No Signup | ToolNix',
         'description': 'Remove EXIF metadata from photos online for free. Strip GPS location, camera model, date, and hidden data from JPG, PNG, WEBP. No registration. Privacy protected.',
-        'keywords': 'remove exif data online free, strip exif data from image, remove metadata from photo online',
+        'keywords': 'remove exif data online free, strip exif data from image, remove metadata from photo online, exif remover free online, delete exif data from jpg free, remove gps from photo online free, remove exif data from photo before sharing online, how to remove location data from photo free, strip metadata from image online no signup, remove hidden data from jpg online free, exif data remover tool free no registration, remove camera metadata from photo free online, delete gps coordinates from photo online, how to remove exif data from iphone photos free, remove exif data from image batch free online, privacy photo cleaner free online tool',
         'json_ld': {
             '@context': 'https://schema.org',
             '@graph': [
@@ -515,7 +515,7 @@ SEO_DATA = {
                             'name': 'Does removing EXIF data affect image quality?',
                             'acceptedAnswer': {
                                 '@type': 'Answer',
-                                'text': 'No. EXIF data is separate from pixel data. Removing it has zero effect on your image visual quality or resolution.',
+                                'text': 'No. EXIF data is separate from pixel data. Removing it has zero effect on your image\'s visual quality or resolution.',
                             },
                         },
                         {
@@ -532,22 +532,6 @@ SEO_DATA = {
                             'acceptedAnswer': {
                                 '@type': 'Answer',
                                 'text': 'Facebook and Instagram strip most EXIF on upload, but direct file sharing via email, WhatsApp, or Telegram preserves all metadata. Always strip EXIF before sharing files directly.',
-                            },
-                        },
-                        {
-                            '@type': 'Question',
-                            'name': 'Can I remove EXIF data from multiple images at once?',
-                            'acceptedAnswer': {
-                                '@type': 'Answer',
-                                'text': 'Yes. Upload multiple files simultaneously for batch EXIF removal. All cleaned images are available to download individually or as a single ZIP file.',
-                            },
-                        },
-                        {
-                            '@type': 'Question',
-                            'name': 'What image formats are supported for EXIF removal?',
-                            'acceptedAnswer': {
-                                '@type': 'Answer',
-                                'text': 'JPG/JPEG, PNG, WEBP, TIFF, BMP, and HEIC (iPhone) are all supported for EXIF removal.',
                             },
                         },
                     ],

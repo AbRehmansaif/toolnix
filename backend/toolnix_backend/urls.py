@@ -28,8 +28,8 @@ urlpatterns = [
 
     # ── Media files (uploaded images, etc.) ──────────────────────────────────
     # Nginx proxies /media/ to Django, so we must serve them explicitly.
-    # This works in both DEBUG=True (dev) and DEBUG=False (production).
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    # We optionally match /serve to support the BypassNginxStorage.
+    re_path(r'^media/(?P<path>.*?)(?:/serve)?$', serve, {'document_root': settings.MEDIA_ROOT}),
 
     # ── Frontend catch-all ────────────────────────────────────────────────────
     # Every non-API URL is served by Django with SEO meta tags injected.

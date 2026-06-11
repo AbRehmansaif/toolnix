@@ -27,9 +27,9 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     # ── Media files (uploaded images, etc.) ──────────────────────────────────
-    # Nginx proxies /media/ to Django, so we must serve them explicitly.
-    # This works in both DEBUG=True (dev) and DEBUG=False (production).
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    # We use /user-media/ instead of /media/ so Nginx doesn't try to serve it
+    # as a static file. Nginx will proxy it to Django, which serves it from the volume.
+    re_path(r'^user-media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 
     # ── Frontend catch-all ────────────────────────────────────────────────────
     # Every non-API URL is served by Django with SEO meta tags injected.

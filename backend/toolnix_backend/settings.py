@@ -154,7 +154,7 @@ STORAGES = {
 }
 
 import os
-MEDIA_URL = '/media/'
+MEDIA_URL = '/api/media/'
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 _cors_env = os.environ.get('CORS_ALLOWED_ORIGINS', '')

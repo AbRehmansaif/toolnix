@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from django.conf import settings
+from django.views.static import serve
 from seo.views import serve_frontend
 
 urlpatterns = [
@@ -23,6 +25,11 @@ urlpatterns = [
     path('api/', include('converter.urls')),
     path('api/blogs/', include('blogs.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # ── Media files (uploaded images, etc.) ──────────────────────────────────
+    # Nginx proxies /media/ to Django, so we must serve them explicitly.
+    # This works in both DEBUG=True (dev) and DEBUG=False (production).
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 
     # ── Frontend catch-all ────────────────────────────────────────────────────
     # Every non-API URL is served by Django with SEO meta tags injected.

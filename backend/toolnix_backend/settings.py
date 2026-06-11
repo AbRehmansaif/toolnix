@@ -144,11 +144,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import os
-# Bypass Nginx's /media/ static location block by using a different URL.
-# This forces Nginx to proxy image requests to Django, ensuring new uploads
-# work instantly without needing to deploy or touch the server config.
-MEDIA_URL = '/user-media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
 
 _cors_env = os.environ.get('CORS_ALLOWED_ORIGINS', '')
 CORS_ALLOWED_ORIGINS = [

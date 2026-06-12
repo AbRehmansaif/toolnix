@@ -793,7 +793,7 @@ export default function FaviconGenerator() {
           <div className="tool-header-content">
             <div className="tool-header-title">Favicon & App Icon Generator</div>
             <div className="tool-header-desc">
-              Upload any image and instantly generate a complete icon package — website favicons, iOS, Android, macOS, Windows tiles, PWA icons, and website logo strip. Download everything as a ready-to-use ZIP.
+              Upload any image and instantly generate a complete icon package, website favicons, iOS, Android, macOS, Windows tiles, PWA icons, and website logo strip. Download everything as a ready to use ZIP.
             </div>
             <div className="info-chips" style={{ marginTop: 16 }}>
               <span className="info-chip">✓ 35+ Icon Sizes</span>

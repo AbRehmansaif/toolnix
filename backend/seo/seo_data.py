@@ -553,6 +553,65 @@ SEO_DATA = {
         'title': 'QR Code Generator Free Online — Create Custom QR Codes | ToolNix',
         'description': 'Generate QR codes online for free. Create QR codes for URLs, text, email, WiFi, and more. Download PNG or SVG. No registration, no watermark, no expiry. Free forever.',
         'keywords': 'qr code generator free online, create qr code for website free, free qr code generator no expiry',
+        'json_ld': {
+            '@context': 'https://schema.org',
+            '@graph': [
+                {
+                    '@type': 'SoftwareApplication',
+                    'name': 'QR Code Generator — ToolNix',
+                    'url': 'https://toolnix.pro/tools/qr-code-generator',
+                    'applicationCategory': 'UtilitiesApplication',
+                    'operatingSystem': 'Web Browser',
+                    'description': 'Generate QR codes online for free. Create QR codes for URLs, text, email, WiFi, and more. Download PNG or SVG. No registration, no watermark, no expiry.',
+                    'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
+                    'featureList': [
+                        'Generate static QR codes',
+                        'URL, Text, Email, Phone, SMS, WiFi formats',
+                        'Customizable colors',
+                        'Error correction level control',
+                        'No registration required',
+                        'No expiry date',
+                    ],
+                },
+                {
+                    '@type': 'FAQPage',
+                    'mainEntity': [
+                        {
+                            '@type': 'Question',
+                            'name': 'Do the QR codes expire?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'No. ToolNix generates static QR codes — the data is encoded inside the image itself, so there are no servers to go offline and no expiry date.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'What format should I download — PNG or SVG?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'PNG is best for digital use (web, social, screen). SVG is best for print — it scales to any size without pixelation.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'Can I add my logo to the QR code?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Yes. Upload a logo image and it will be embedded in the center of your QR code while keeping it scannable.',
+                            },
+                        },
+                        {
+                            '@type': 'Question',
+                            'name': 'How many QR codes can I generate for free?',
+                            'acceptedAnswer': {
+                                '@type': 'Answer',
+                                'text': 'Unlimited. Generate as many QR codes as you need — free forever, no account required.',
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
     },
     'bg-remover': {
         'title': 'Remove Background from Image Free Online — AI Tool | ToolNix',

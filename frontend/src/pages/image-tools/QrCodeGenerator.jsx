@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { QrCode, Download, Copy, RefreshCw, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import QRCode from 'qrcode';
-import { Helmet } from 'react-helmet-async';
 import '../../styles/ToolPage.css';
 
 const TYPES = [
@@ -79,70 +78,6 @@ export default function QrCodeGenerator() {
 
   return (
     <>
-      <Helmet>
-        <title>QR Code Generator Free Online — Create Custom QR Codes | ToolNix</title>
-        <meta name="description" content="Generate QR codes online for free. Create QR codes for URLs, text, email, WiFi, and more. Download PNG or SVG. No registration, no watermark, no expiry. Free forever." />
-        <link rel="canonical" href="https://toolnix.pro/qr-code-generator" />
-        <meta property="og:title" content="QR Code Generator Free Online — Create Custom QR Codes | ToolNix" />
-        <meta property="og:description" content="Generate QR codes online for free. Create QR codes for URLs, text, email, WiFi, and more. Download PNG or SVG. No registration, no watermark, no expiry. Free forever." />
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "SoftwareApplication",
-                  "name": "QR Code Generator Free Online — Create Custom QR Codes | ToolNix",
-                  "operatingSystem": "Web",
-                  "applicationCategory": "UtilitiesApplication",
-                  "offers": {
-                    "@type": "Offer",
-                    "price": "0.00",
-                    "priceCurrency": "USD"
-                  }
-                },
-                {
-                  "@type": "FAQPage",
-                  "mainEntity": [
-                    {
-                      "@type": "Question",
-                      "name": "Do the QR codes expire?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "No. ToolNix generates static QR codes — the data is encoded inside the image itself, so there are no servers to go offline and no expiry date."
-                      }
-                    },
-                    {
-                      "@type": "Question",
-                      "name": "What format should I download — PNG or SVG?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "PNG is best for digital use (web, social, screen). SVG is best for print — it scales to any size without pixelation."
-                      }
-                    },
-                    {
-                      "@type": "Question",
-                      "name": "Can I add my logo to the QR code?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes. Upload a logo image and it will be embedded in the center of your QR code while keeping it scannable."
-                      }
-                    },
-                    {
-                      "@type": "Question",
-                      "name": "How many QR codes can I generate for free?",
-                      "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Unlimited. Generate as many QR codes as you need — free forever, no account required."
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          `}
-        </script>
-      </Helmet>
     <div className="tool-page">
       <div className="tool-breadcrumb">
         <Link to="/">Home</Link>

@@ -102,8 +102,9 @@ function setLink(rel, href) {
 
 // ─── Find tool + category from path ──────────────────────────────────────────
 function findToolAndCategory(pathname) {
+  const normalizedPath = pathname.endsWith('/') && pathname !== '/' ? pathname.slice(0, -1) : pathname;
   for (const category of toolCategories) {
-    const tool = category.tools.find(t => t.path === pathname);
+    const tool = category.tools.find(t => t.path === normalizedPath);
     if (tool) return { tool, category };
   }
   return { tool: null, category: null };
@@ -116,7 +117,11 @@ function Layout({ children }) {
   const currentToolId = tool?.id || null;
 
   useEffect(() => {
-    const canonicalUrl = `${BASE_URL}${location.pathname}`;
+    // Ensure canonical URLs never have a trailing slash (except for the homepage itself)
+    const normalizedPath = location.pathname.endsWith('/') && location.pathname !== '/' 
+      ? location.pathname.slice(0, -1) 
+      : location.pathname;
+    const canonicalUrl = `${BASE_URL}${normalizedPath}`;
 
     if (isToolPage && tool) {
       const toolSeo = seoData[tool.id] || {};
